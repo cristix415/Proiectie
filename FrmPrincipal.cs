@@ -528,16 +528,16 @@ namespace ProiectareCantari
         }
 
 
-        // doar pentru upload
+        // doar pentru upload  - upload initial a cantarilor din fisierele txt de pe resurse crestine
         private void CitesteFisierele()
         {
 
             DirectoryInfo d = new DirectoryInfo(@"C:\Users\Cristian\Downloads\cantece-resurse-crestine-ccli-standard");//Assuming Test is your Folder
             FileInfo[] Files = d.GetFiles(); //Getting Text files
             IList<string> str = new List<string>();
-            string[] lines;
+            
             IList<CantareFormatata> listaCantari = new List<CantareFormatata>();
-         //   FileInfo file = Files[0];
+         
             foreach (FileInfo file in Files)
             {
                 CantareFormatata cantare = new CantareFormatata();

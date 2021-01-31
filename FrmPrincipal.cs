@@ -9,15 +9,17 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ProiectareCantari
 {
     public partial class FrmPrincipal : Form
     {
+        private delegate void SafeCallDelegate(BindingSource binding);
         FrmSecondMonitor formSecondMonitor;
         Ceas formCeas;
-        Screen _screen;
+        Screen _screen;        
 
         private string ConnectionString = "Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\db.db";
         private readonly List<Cantare> _listcantari = new List<Cantare>();
@@ -94,7 +96,7 @@ namespace ProiectareCantari
             IList<CantareFormatata> listaCantariFormatate = new List<CantareFormatata>();
             IList<Cantare> listBIND;
             if (checkBoxBetel.Checked)
-                listBIND = _listcantari.Where(x => x.FlafBetel == 1).ToList();
+                listBIND = _listcantari.Where(x => x.FlagBetel == 1).ToList();
             else
                 listBIND = _listcantari;
 
@@ -135,7 +137,10 @@ namespace ProiectareCantari
             }
 
             _listaCantariFormatate = listaCantariFormatate;
-            dgwlista.DataSource = _listaCantariFormatate;
+
+            var binding = new BindingSource();
+            binding.DataSource = _listaCantariFormatate;
+            dgwlista.DataSource = binding;
 
         }
         private void ProiecteazaCantare(Rectangle workingArea)
@@ -162,8 +167,8 @@ namespace ProiectareCantari
             labelTitlu.Text = cantare.Titlu;
             labelTitlu.AutoSize = false;
 
-            labelTitlu.Width = 200;
-            labelTitlu.Height = 30;
+            labelTitlu.Width = _screen.WorkingArea.Size.Width / 6;
+            
             foreach (var strofa in cantare.ListaStrofe)
             {
                 Label lblStrofa = new Label();
@@ -206,6 +211,24 @@ namespace ProiectareCantari
 
             }
         }
+        private void CautaDupaTitlu()
+        {   
+            BindingSource lista = dgwlista.DataSource as BindingSource;
+            var lis = lista.DataSource as List<CantareFormatata>;
+            lis = _listaCantariFormatate.ToList();
+            string cuvant = txtCautare.Text.ToLower();
+            var listtt = lis.Where(c => c.Titlu.ToLower().Contains(cuvant));
+
+            var binding = new BindingSource();
+
+            binding.DataSource = listtt;
+
+            dgwlista.DataSource = binding;
+
+        }
+
+   
+     
 
         #region SETARI
         private void btnCuloareFundal_Click(object sender, EventArgs e)
@@ -317,7 +340,6 @@ namespace ProiectareCantari
             {
                 AddCantareDB(cantare);
                 BindCantari();
-                tabControl1.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -330,9 +352,9 @@ namespace ProiectareCantari
             frmOpenCantare.ShowDialog();
             if (frmOpenCantare.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                AdaugaCantare(frmOpenCantare.Cantare);                
+                AdaugaCantare(frmOpenCantare.Cantare);
             }
-            
+
         }
         private void StergeCantare(Cantare cantare)
         {
@@ -389,12 +411,11 @@ namespace ProiectareCantari
                 }
 
                 OpenCantare frmOpenCantare = new OpenCantare(cantare.Cantare);
-                frmOpenCantare.Show();
+                frmOpenCantare.ShowDialog();
 
                 if (frmOpenCantare.DialogResult == System.Windows.Forms.DialogResult.OK)
                 {
                     ModificaCantareDB(frmOpenCantare.Cantare);
-                    frmOpenCantare.Dispose();
                 }
             }
             catch
@@ -419,12 +440,10 @@ namespace ProiectareCantari
                 SQLiteCommand command = new SQLiteCommand(stringSql, connection);
                 command.Parameters.AddWithValue("@titlu", titlu);
                 command.Parameters.AddWithValue("@versuri", versuri);
-                command.Parameters.AddWithValue("@flagBetel", "1");
+                command.Parameters.AddWithValue("@flagBetel", 1);
 
                 var tt = command.ExecuteNonQuery();
 
-                //Remove from the local copy
-                tabControl1.SelectedIndex = 0;
 
                 LoadCantari();
                 BindCantari();
@@ -443,17 +462,7 @@ namespace ProiectareCantari
 
             if (_screen != null)
             {
-                if (formSecondMonitor == null)
-                {
-                    formSecondMonitor = new FrmSecondMonitor();
-                    formSecondMonitor.StartPosition = FormStartPosition.Manual;
-                    formSecondMonitor.Left = _screen.WorkingArea.Left + 10;
-                    formSecondMonitor.Top = _screen.WorkingArea.Top + 10;
-                    formSecondMonitor.Width = _screen.WorkingArea.Width + 10;
-                    formSecondMonitor.Height = _screen.WorkingArea.Height + 10;
-                    formSecondMonitor.WindowState = FormWindowState.Maximized;
-                    formSecondMonitor.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                }
+
                 formSecondMonitor.BindStrofa(lblStrofa.Text);
                 formSecondMonitor.BringToFront();
                 ProiecteazaCantare(_screen.WorkingArea);
@@ -529,27 +538,8 @@ namespace ProiectareCantari
 
         private void txtCautare_TextChanged(object sender, EventArgs e)
         {
-
-            var lista = _listaCantariFormatate;
-            if (txtCautare.Text.Length > 3 && txtCautare.Text != "")
-            {
-                for (int i = lista.Count - 1; i >= 0; i--)
-                {
-                    CantareFormatata item = lista[i] as CantareFormatata;
-                    if (!item.Titlu.ToLower().Contains(txtCautare.Text.ToLower()))
-                        lista.Remove(item);
-                }
-                var binding = new BindingSource();
-                binding.DataSource = lista;
-                dgwlista.DataSource = binding;
-
-            }
-            else
-            {
-                BindCantari();
-            }
+            CautaDupaTitlu();
         }
-
 
         private void dgwlista_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

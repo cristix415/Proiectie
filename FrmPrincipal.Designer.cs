@@ -194,10 +194,13 @@
             // 
             // dgwlista
             // 
+            this.dgwlista.AllowUserToAddRows = false;
+            this.dgwlista.AllowUserToDeleteRows = false;
             this.dgwlista.AllowUserToResizeColumns = false;
             this.dgwlista.AllowUserToResizeRows = false;
             this.dgwlista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwlista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwlista.ColumnHeadersHeight = 29;
+            this.dgwlista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgwlista.ColumnHeadersVisible = false;
             this.dgwlista.EnableHeadersVisualStyles = false;
             this.dgwlista.Location = new System.Drawing.Point(20, 66);
@@ -211,6 +214,7 @@
             this.dgwlista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwlista.Size = new System.Drawing.Size(400, 525);
             this.dgwlista.TabIndex = 7;
+            this.dgwlista.VirtualMode = true;
             this.dgwlista.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwlista_CellDoubleClick);
             // 
             // labelTitlu

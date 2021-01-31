@@ -70,5 +70,17 @@ namespace ProiectareCantari.Properties {
                 this["MarimeCeas"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FlagCeas {
+            get {
+                return ((bool)(this["FlagCeas"]));
+            }
+            set {
+                this["FlagCeas"] = value;
+            }
+        }
     }
 }

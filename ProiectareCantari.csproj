@@ -100,7 +100,14 @@
     <Compile Include="FrmSecondMonitor.Designer.cs">
       <DependentUpon>FrmSecondMonitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="MySettings.cs" />
+    <Compile Include="OpenCantare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenCantare.Designer.cs">
+      <DependentUpon>OpenCantare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Ceas.resx">
@@ -111,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSecondMonitor.resx">
       <DependentUpon>FrmSecondMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenCantare.resx">
+      <DependentUpon>OpenCantare.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

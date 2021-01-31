@@ -43,6 +43,7 @@
             this.lblStrofa.TabIndex = 0;
             this.lblStrofa.Text = "label1";
             this.lblStrofa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStrofa.TextChanged += new System.EventHandler(this.lblStrofa_TextChanged);
             // 
             // FrmSecondMonitor
             // 
@@ -52,8 +53,7 @@
             this.ClientSize = new System.Drawing.Size(832, 264);
             this.Controls.Add(this.lblStrofa);
             this.Name = "FrmSecondMonitor";
-            this.Text = "FrmSecondMonitor";
-            this.Shown += new System.EventHandler(this.FrmSecondMonitor_Shown);
+            this.Text = "FrmSecondMonitor";            
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmSecondMonitor_KeyDown);
             this.ResumeLayout(false);
 

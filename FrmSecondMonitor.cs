@@ -10,22 +10,19 @@ using System.Windows.Forms;
 namespace ProiectareCantari
 {
     public partial class FrmSecondMonitor : Form
-    {
-        public String Strofa;
-        
+    {        
         public FrmSecondMonitor()
         {
             InitializeComponent();
             this.BackColor = Properties.Settings.Default.CuloareFundal;
         }
-        public void BindStrofa(String strofa) {
-            var gg = Properties.Settings.Default.MarimeVersuri;
-            lblStrofa.Text = strofa;
+        public void BindStrofa(String strofa)
+        {
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
-            lblStrofa.Font = new Font("Microsoft Sans Serif", Properties.Settings.Default.MarimeVersuri, FontStyle.Regular);
+            lblStrofa.Text = strofa;            
         }
-
+        
         private void FrmSecondMonitor_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -34,9 +31,9 @@ namespace ProiectareCantari
             }
         }
 
-        private void FrmSecondMonitor_Shown(object sender, EventArgs e)
+        private void lblStrofa_TextChanged(object sender, EventArgs e)
         {
-
+            Helper.MeasureStringMin(lblStrofa, 80);
         }
     }
 }

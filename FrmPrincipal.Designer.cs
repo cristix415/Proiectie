@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
-            this.rtxtCantare = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBoxClock = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,38 +41,25 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxBetel = new System.Windows.Forms.CheckBox();
             this.dgwlista = new System.Windows.Forms.DataGridView();
             this.labelTitlu = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAdaugaCantareNoua = new System.Windows.Forms.Button();
             this.buttonModifica = new System.Windows.Forms.Button();
             this.flowStrofe = new System.Windows.Forms.FlowLayoutPanel();
             this.txtCautare = new System.Windows.Forms.TextBox();
             this.btnSterge = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnModifica = new System.Windows.Forms.Button();
-            this.btnSalveaza = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBoxBetel = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
-            this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // rtxtCantare
-            // 
-            this.rtxtCantare.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtxtCantare.Location = new System.Drawing.Point(19, 11);
-            this.rtxtCantare.Name = "rtxtCantare";
-            this.rtxtCantare.Size = new System.Drawing.Size(412, 639);
-            this.rtxtCantare.TabIndex = 0;
-            this.rtxtCantare.Text = "";
-            this.rtxtCantare.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtxtCantare_KeyDown);
             // 
             // button1
             // 
@@ -127,6 +113,7 @@
             this.textBoxMarimeCantari.Size = new System.Drawing.Size(53, 34);
             this.textBoxMarimeCantari.TabIndex = 8;
             this.textBoxMarimeCantari.Text = "72";
+            this.textBoxMarimeCantari.Visible = false;
             this.textBoxMarimeCantari.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxMarimeCantari_KeyDown);
             // 
             // label2
@@ -138,6 +125,7 @@
             this.label2.Size = new System.Drawing.Size(100, 29);
             this.label2.TabIndex = 7;
             this.label2.Text = "Marime:";
+            this.label2.Visible = false;
             // 
             // btnCuloareFundal
             // 
@@ -178,7 +166,7 @@
             this.tabPage2.Controls.Add(this.checkBoxBetel);
             this.tabPage2.Controls.Add(this.dgwlista);
             this.tabPage2.Controls.Add(this.labelTitlu);
-            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.btnAdaugaCantareNoua);
             this.tabPage2.Controls.Add(this.buttonModifica);
             this.tabPage2.Controls.Add(this.flowStrofe);
             this.tabPage2.Controls.Add(this.txtCautare);
@@ -190,6 +178,19 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Lista Cantari";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxBetel
+            // 
+            this.checkBoxBetel.AutoSize = true;
+            this.checkBoxBetel.Checked = true;
+            this.checkBoxBetel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxBetel.Location = new System.Drawing.Point(319, 18);
+            this.checkBoxBetel.Name = "checkBoxBetel";
+            this.checkBoxBetel.Size = new System.Drawing.Size(97, 29);
+            this.checkBoxBetel.TabIndex = 8;
+            this.checkBoxBetel.Text = "BETEL";
+            this.checkBoxBetel.UseVisualStyleBackColor = true;
+            this.checkBoxBetel.CheckedChanged += new System.EventHandler(this.checkBoxBetel_CheckedChanged);
             // 
             // dgwlista
             // 
@@ -221,15 +222,15 @@
             this.labelTitlu.Text = "TITLU CANTARII";
             this.labelTitlu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button2
+            // btnAdaugaCantareNoua
             // 
-            this.button2.Location = new System.Drawing.Point(36, 654);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(375, 45);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Adauga Cantare noua";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnAdaugaCantareNoua.Location = new System.Drawing.Point(36, 654);
+            this.btnAdaugaCantareNoua.Name = "btnAdaugaCantareNoua";
+            this.btnAdaugaCantareNoua.Size = new System.Drawing.Size(375, 45);
+            this.btnAdaugaCantareNoua.TabIndex = 5;
+            this.btnAdaugaCantareNoua.Text = "Adauga Cantare noua";
+            this.btnAdaugaCantareNoua.UseVisualStyleBackColor = true;
+            this.btnAdaugaCantareNoua.Click += new System.EventHandler(this.AdaugaCantareNoua_Click);
             // 
             // buttonModifica
             // 
@@ -271,39 +272,12 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btnModifica);
-            this.tabPage1.Controls.Add(this.btnSalveaza);
-            this.tabPage1.Controls.Add(this.rtxtCantare);
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(820, 705);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // btnModifica
-            // 
-            this.btnModifica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifica.Location = new System.Drawing.Point(182, 655);
-            this.btnModifica.Name = "btnModifica";
-            this.btnModifica.Size = new System.Drawing.Size(111, 42);
-            this.btnModifica.TabIndex = 4;
-            this.btnModifica.Text = "Modifica";
-            this.btnModifica.UseVisualStyleBackColor = true;
-            this.btnModifica.Visible = false;
-            this.btnModifica.Click += new System.EventHandler(this.btnModifica_Click);
-            // 
-            // btnSalveaza
-            // 
-            this.btnSalveaza.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalveaza.Location = new System.Drawing.Point(65, 655);
-            this.btnSalveaza.Name = "btnSalveaza";
-            this.btnSalveaza.Size = new System.Drawing.Size(111, 42);
-            this.btnSalveaza.TabIndex = 3;
-            this.btnSalveaza.Text = "Salveaza";
-            this.btnSalveaza.UseVisualStyleBackColor = true;
-            this.btnSalveaza.Visible = false;
-            this.btnSalveaza.Click += new System.EventHandler(this.btnSalveaza_Click);
             // 
             // tabPage3
             // 
@@ -316,7 +290,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Cantari INTERNET";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
             // 
             // dataGridView1
             // 
@@ -355,19 +328,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // checkBoxBetel
-            // 
-            this.checkBoxBetel.AutoSize = true;
-            this.checkBoxBetel.Checked = true;
-            this.checkBoxBetel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBetel.Location = new System.Drawing.Point(319, 18);
-            this.checkBoxBetel.Name = "checkBoxBetel";
-            this.checkBoxBetel.Size = new System.Drawing.Size(97, 29);
-            this.checkBoxBetel.TabIndex = 8;
-            this.checkBoxBetel.Text = "BETEL";
-            this.checkBoxBetel.UseVisualStyleBackColor = true;
-            this.checkBoxBetel.CheckedChanged += new System.EventHandler(this.checkBoxBetel_CheckedChanged);
-            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -391,7 +351,6 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).EndInit();
-            this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -401,8 +360,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox rtxtCantare;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBoxClock;
         private System.Windows.Forms.Label label1;
@@ -416,13 +373,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnSalveaza;
         private System.Windows.Forms.Button btnSterge;
-        private System.Windows.Forms.Button btnModifica;
         private System.Windows.Forms.TextBox txtCautare;
         private System.Windows.Forms.FlowLayoutPanel flowStrofe;
         private System.Windows.Forms.Button buttonModifica;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAdaugaCantareNoua;
         private System.Windows.Forms.Label labelTitlu;
         private System.Windows.Forms.DataGridView dgwlista;
         private System.Windows.Forms.TabPage tabPage3;

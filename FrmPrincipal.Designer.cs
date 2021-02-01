@@ -347,6 +347,7 @@
             this.Controls.Add(this.checkBoxClock);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
             this.Text = "Afisare Cantari   - by Cristty";

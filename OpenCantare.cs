@@ -29,12 +29,19 @@ namespace ProiectareCantari
         private void btnSalveaza_Click(object sender, EventArgs e)
         {
             var titlu = rtxtCantare.Text.Split(new string[] { "\n" }, StringSplitOptions.None)[0];
-            var versuri = rtxtCantare.Text + "\n\nBETEL";
+            string versuri;
             if (_cantare == null)
+            {
+                versuri = rtxtCantare.Text + "\n\nBETEL";
                 _cantare = new Cantare(titlu, versuri, 1);
+            }
             else
+            {
+                versuri = rtxtCantare.Text;
+                _cantare.Versuri = versuri;
                 _cantare.Titlu = titlu;
-            _cantare.Versuri = versuri;
+            }
+ 
             this.Dispose();
             DialogResult = DialogResult.OK;
         }

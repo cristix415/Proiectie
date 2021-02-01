@@ -14,7 +14,11 @@ namespace ProiectareCantari
         [Browsable(false)]
         public string TextulTOT { get; set; }
         [Browsable(false)]
+        public string Ending { get; set; }
+
+        [Browsable(false)]
         public IList<string> ListaStrofe { get; set; }
+
         [Browsable(false)]
         public IList<string>  listaCor { get; set; }
         [Browsable(false)]

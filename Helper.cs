@@ -11,7 +11,7 @@ namespace ProiectareCantari
     {
         public static void MeasureStringMin(Label lblStrofa, int maxSize)
         {
-
+            SizeF text_size= new SizeF();
             if (lblStrofa.Text.Length > 0)
             {
                 // Make a Graphics object to measure the text.
@@ -23,7 +23,7 @@ namespace ProiectareCantari
                         {
                             // See how much space the text would
                             // need, specifying a maximum width.
-                            SizeF text_size =
+                             text_size =
                                         TextRenderer.MeasureText(
                                             lblStrofa.Text,
                                             test_font,
@@ -48,6 +48,19 @@ namespace ProiectareCantari
                             }
                         }
                     }
+                }
+                var mm = maxSize - (maxSize * 20 / 100);
+                using (var test_font = new Font(lblStrofa.Font.FontFamily, mm ))
+                {
+                    SizeF text_sizeNOU =
+                            TextRenderer.MeasureText(
+                                lblStrofa.Text,
+                                test_font,
+                                new Size(lblStrofa.Width, int.MaxValue),
+                                TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    if (text_size.Height > text_sizeNOU.Height + (text_sizeNOU.Height*30/100))
+                        maxSize = mm;
+
                 }
 
                 // Use that font size.

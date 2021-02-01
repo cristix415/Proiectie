@@ -15,7 +15,7 @@
       <Value Profile="(Default)">80</Value>
     </Setting>
     <Setting Name="FlagCeas" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

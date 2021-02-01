@@ -111,23 +111,28 @@ namespace ProiectareCantari
                 cantare.TextulTOT = cantareDB.Versuri;
                 for (int i = 1; i < cantareNeta.Length - 1; i++)
                 {
+                    string strofa = cantareNeta[i];
+                    while (strofa.Length>1 && strofa.Substring(0, 1) == "\n")
+                        strofa = strofa.Substring(1, strofa.Length-2);
 
-
-                    if (cantareNeta[i].Length > 4 && (cantareNeta[i].Substring(0, 6) == "Chorus" || cantareNeta[i].Substring(0, 2) == "c\n" || cantareNeta[i].Substring(0, 5) == "Verse"))
+                    if (strofa.Length > 4 && (strofa.Substring(0, 6) == "Chorus" || strofa.Substring(0, 6) == "Ending" || strofa.Substring(0, 2) == "c\n" || strofa.Substring(0, 5) == "Verse"))
                     {
 
-                        if (cantareNeta[i].Substring(0, 6) == "Chorus")
-                            cantare.listaCor.Add(cantareNeta[i].Substring(9, cantareNeta[i].Length - 10));
-                        if (cantareNeta[i].Substring(0, 5) == "Verse")
-                            cantare.ListaStrofe.Add(cantareNeta[i].Substring(9, cantareNeta[i].Length - 10));
-                        if (cantareNeta[i].Substring(0, 2) == "c\n")
-                            cantare.listaCor.Add(cantareNeta[i].Substring(4, cantareNeta[i].Length - 5));
+                        if (strofa.Substring(0, 6) == "Chorus")
+                            cantare.listaCor.Add(strofa.Substring(9, strofa.Length - 10));
+                        if (strofa.Substring(0, 5) == "Verse")
+                            cantare.ListaStrofe.Add(strofa.Substring(9, strofa.Length - 10));
+                        if (strofa.Substring(0, 2) == "c\n")
+                            cantare.listaCor.Add(strofa.Substring(2, strofa.Length - 3));
+                        if (strofa.Substring(0, 6) == "Ending")
+                            cantare.Ending = strofa.Substring(9, strofa.Length - 10);
+
                     }
                     else
                     {
-                        if (cantareNeta[i].Length > 4)
+                        if (strofa.Length > 4)
                         {
-                            cantare.ListaStrofe.Add(cantareNeta[i]);
+                            cantare.ListaStrofe.Add(strofa);
                         }
                     }
 
@@ -171,46 +176,44 @@ namespace ProiectareCantari
             
             foreach (var strofa in cantare.ListaStrofe)
             {
-                Label lblStrofa = new Label();
-                lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
-                lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-                lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
-                lblStrofa.Text = strofa;
-                lblStrofa.AutoSize = false;
-                lblStrofa.TextAlign = ContentAlignment.MiddleCenter;
-
-                lblStrofa.Margin = new Padding(10);
-                lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
-                lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
-
-                //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
-                lblStrofa.Click += new EventHandler(FireClickEvent);
-
+                Label lblStrofa = CreareLabel(strofa);
                 flowStrofe.Controls.Add(lblStrofa);
-
 
                 if (cantare.listaCor.Count > 0)
                 {
-                    lblStrofa = new Label();
-                    lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
-                    lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-                    lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
-                    lblStrofa.Text = cantare.listaCor[0];
-                    lblStrofa.AutoSize = false;
-                    lblStrofa.TextAlign = ContentAlignment.MiddleCenter;
-
-                    lblStrofa.Margin = new Padding(10);
-                    lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
-                    lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
-
-                    //    lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
-                    lblStrofa.Click += new EventHandler(FireClickEvent);
-
-                    flowStrofe.Controls.Add(lblStrofa);
+                    Label lblCor = CreareLabel(cantare.listaCor[0]);
+                    flowStrofe.Controls.Add(lblCor);
                 }
 
             }
+            if (!String.IsNullOrEmpty(cantare.Ending))
+            {
+                Label lblEnd = CreareLabel(cantare.Ending);
+                flowStrofe.Controls.Add(lblEnd);
+            }
         }
+
+        private Label CreareLabel(string text)
+        {
+            Label lblStrofa = new Label();
+            lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
+            lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
+            lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
+            lblStrofa.Text = text;
+            lblStrofa.AutoSize = false;
+            lblStrofa.TextAlign = ContentAlignment.MiddleCenter;
+
+            lblStrofa.Margin = new Padding(10);
+            lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
+            lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
+
+            //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
+            lblStrofa.Click += new EventHandler(FireClickEvent);
+
+         
+            return lblStrofa;
+        }
+
         private void CautaDupaTitlu()
         {   
             BindingSource lista = dgwlista.DataSource as BindingSource;
@@ -459,6 +462,7 @@ namespace ProiectareCantari
             Label lblStrofa = sender as Label;
             lblStrofa.ForeColor = Color.Red;
             lblStrofa.BorderStyle = BorderStyle.FixedSingle;
+            lblStrofa.Name = "focus";
 
             if (_screen != null)
             {
@@ -500,7 +504,27 @@ namespace ProiectareCantari
 
         private void button1_KeyDown(object sender, KeyEventArgs e)
         {
-            Oprire(e);
+            if (e.KeyCode == Keys.Escape)
+            {
+                formSecondMonitor.Hide();
+                foreach (Label ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Color.White;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+
+                foreach (Label ctl in flowStrofe.Controls)                
+                    ctl.ForeColor = Color.White;
+                for (int i= 0; i< flowStrofe.Controls.Count;i++)
+                    if (flowStrofe.Controls[i].Name == "focus")
+                    {
+                        Label label = (Label)(flowStrofe.Controls[i + 1]);
+                        FireClickEvent(label, null);
+                    }
+
+            }
+
+
         }
 
         private void checkBoxClock_CheckedChanged(object sender, EventArgs e)

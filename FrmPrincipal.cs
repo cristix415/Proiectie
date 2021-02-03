@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -19,19 +20,23 @@ namespace ProiectareCantari
         private delegate void SafeCallDelegate(BindingSource binding);
         FrmSecondMonitor formSecondMonitor;
         Ceas formCeas;
-        Screen _screen;        
+        Screen _screen;
+        FrmBiblie _formBiblie;
 
         private string ConnectionString = "Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\db.db";
         private readonly List<Cantare> _listcantari = new List<Cantare>();
 
         IList<CantareFormatata> _listaCantariFormatate;
+        IList<Book> _listaCarti = new List<Book>();
+        IList<Verses> _listaVersete = new List<Verses>();
+        Book _carte;
         public FrmPrincipal()
         {
             InitializeComponent();
 
             try
             {
-                tabControl1.TabPages.Remove(tabPage1);
+
                 tabControl1.TabPages.Remove(tabPage3);
 
                 if (Screen.AllScreens.Length > 1)
@@ -52,6 +57,7 @@ namespace ProiectareCantari
 
                 LoadCantari();
                 BindCantari();
+                LoadCarti();
             }
             catch (Exception ex)
             {
@@ -112,8 +118,8 @@ namespace ProiectareCantari
                 for (int i = 1; i < cantareNeta.Length - 1; i++)
                 {
                     string strofa = cantareNeta[i];
-                    while (strofa.Length>1 && strofa.Substring(0, 1) == "\n")
-                        strofa = strofa.Substring(1, strofa.Length-2);
+                    while (strofa.Length > 1 && strofa.Substring(0, 1) == "\n")
+                        strofa = strofa.Substring(1, strofa.Length - 2);
 
                     if (strofa.Length > 4 && (strofa.Substring(0, 6) == "Chorus" || strofa.Substring(0, 6) == "Ending" || strofa.Substring(0, 2) == "c\n" || strofa.Substring(0, 5) == "Verse"))
                     {
@@ -173,7 +179,7 @@ namespace ProiectareCantari
             labelTitlu.AutoSize = false;
 
             labelTitlu.Width = _screen.WorkingArea.Size.Width / 6;
-            
+
             foreach (var strofa in cantare.ListaStrofe)
             {
                 Label lblStrofa = CreareLabel(strofa);
@@ -210,12 +216,12 @@ namespace ProiectareCantari
             //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
             lblStrofa.Click += new EventHandler(FireClickEvent);
 
-         
+
             return lblStrofa;
         }
 
         private void CautaDupaTitlu()
-        {   
+        {
             BindingSource lista = dgwlista.DataSource as BindingSource;
             var lis = lista.DataSource as List<CantareFormatata>;
             lis = _listaCantariFormatate.ToList();
@@ -230,8 +236,8 @@ namespace ProiectareCantari
 
         }
 
-   
-     
+
+
 
         #region SETARI
         private void btnCuloareFundal_Click(object sender, EventArgs e)
@@ -492,7 +498,11 @@ namespace ProiectareCantari
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (formSecondMonitor != null)
             formSecondMonitor.Hide();
+            if (_formBiblie != null)
+                _formBiblie.Hide();
+
             foreach (Label ctl in flowStrofe.Controls)
                 ctl.ForeColor = Color.White;
         }
@@ -513,9 +523,9 @@ namespace ProiectareCantari
             if (e.KeyCode == Keys.Down)
             {
 
-                foreach (Label ctl in flowStrofe.Controls)                
+                foreach (Label ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
-                for (int i= 0; i< flowStrofe.Controls.Count;i++)
+                for (int i = 0; i < flowStrofe.Controls.Count; i++)
                     if (flowStrofe.Controls[i].Name == "focus")
                     {
                         Label label = (Label)(flowStrofe.Controls[i + 1]);
@@ -655,9 +665,116 @@ namespace ProiectareCantari
 
             }
         }
+
+
         #endregion
 
+        private void txtCautareBiblia_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string[] referinta = txtCautareBiblia.Text.ToLower().Split(' ');
+
+                _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
+                if (_carte != null)
+                {
+                    CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+
+                }
+                BindingSource binding = new BindingSource();
+                binding.DataSource = _listaVersete;
+                dgvBiblia.DataSource = binding;
 
 
+            }
+        }
+
+        private void LoadCarti()
+        {
+            const string stringSqlBooks = "SELECT * FROM Books";
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SQLiteCommand(stringSqlBooks, connection);
+
+                using (SQLiteDataReader sqlReader = command.ExecuteReader())
+                {
+                    while (sqlReader.Read())
+                    {
+                        int id = Convert.ToInt32(sqlReader["book_number"]);
+                        string shortName = (string)sqlReader["short_name"];
+                        string longName = (string)sqlReader["long_name"];
+
+                        Book book = new Book(id, shortName, longName);
+
+                        _listaCarti.Add(book);
+                    }
+                }
+
+            }
+        }
+        private void CautaVerset(int carte, int capitol, int verset)
+        {
+            _listaVersete.Clear();
+            string stringSql = "SELECT * FROM verses WHERE book_number=" + carte + " and chapter=" + capitol;
+
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SQLiteCommand(stringSql, connection);
+
+                using (SQLiteDataReader sqlReader = command.ExecuteReader())
+                {
+                    while (sqlReader.Read())
+                    {
+                        int book_number = Convert.ToInt32(sqlReader["book_number"]);
+                        int chapter = Convert.ToInt32(sqlReader["chapter"]);
+                        int verse = Convert.ToInt32(sqlReader["verse"]);
+                        string text = (string)sqlReader["text"];
+
+                        Verses versett = new Verses(book_number, chapter, verse, text);
+
+                        _listaVersete.Add(versett);
+                    }
+                }
+
+            }
+        }
+
+        private void txtCautareBiblia_TextChanged(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void dgvBiblia_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvBiblia.SelectedRows.Count > 0)
+            {
+                Verses verset = (dgvBiblia.SelectedRows[0].DataBoundItem) as Verses;
+
+                if (_formBiblie == null)
+                {
+                    _formBiblie = new FrmBiblie(_screen);
+
+                    _formBiblie.StartPosition = FormStartPosition.Manual;
+                    _formBiblie.Left = _screen.WorkingArea.Left + 10;
+                    _formBiblie.Top = _screen.WorkingArea.Top + 10;
+                    _formBiblie.Width = _screen.WorkingArea.Width + 10;
+                    _formBiblie.Height = _screen.WorkingArea.Height + 10;
+                    _formBiblie.WindowState = FormWindowState.Maximized;
+                    _formBiblie.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+   
+                }
+                _formBiblie.Show();
+                _formBiblie.BindVerset(verset);
+                _formBiblie.BringToFront();
+                this.BringToFront();
+
+            }
+        }
     }
 }

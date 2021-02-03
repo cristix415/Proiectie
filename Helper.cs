@@ -17,7 +17,7 @@ namespace ProiectareCantari
                 // Make a Graphics object to measure the text.
                 using (Graphics gr = lblStrofa.CreateGraphics())
                 {
-                    for (int i = 1; i <= maxSize; i++)
+                    for (int i = 20; i <= maxSize; i++)
                     {
                         using (var test_font = new Font(lblStrofa.Font.FontFamily, i))
                         {
@@ -34,7 +34,7 @@ namespace ProiectareCantari
                             {
                                 if (text_size.Height > lblStrofa.Height)
                                 {
-                                    maxSize = i - 1;
+                                    maxSize = i - 5;
                                     break;
                                 }
                             }

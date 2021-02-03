@@ -27,7 +27,7 @@
     <InstallUrl>http://casadaniel.online/ProiectareCantari/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>start.htm</WebPage>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -88,6 +88,12 @@
     <Compile Include="Ceas.Designer.cs">
       <DependentUpon>Ceas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBiblie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBiblie.Designer.cs">
+      <DependentUpon>FrmBiblie.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,8 +116,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Verses.cs" />
     <EmbeddedResource Include="Ceas.resx">
       <DependentUpon>Ceas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBiblie.resx">
+      <DependentUpon>FrmBiblie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

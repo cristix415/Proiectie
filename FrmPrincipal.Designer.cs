@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.button1 = new System.Windows.Forms.Button();
             this.checkBoxClock = new System.Windows.Forms.CheckBox();
@@ -40,7 +42,7 @@
             this.btnCuloareText = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageCANTARI = new System.Windows.Forms.TabPage();
             this.checkBoxBetel = new System.Windows.Forms.CheckBox();
             this.dgwlista = new System.Windows.Forms.DataGridView();
             this.labelTitlu = new System.Windows.Forms.Label();
@@ -49,14 +51,19 @@
             this.flowStrofe = new System.Windows.Forms.FlowLayoutPanel();
             this.txtCautare = new System.Windows.Forms.TextBox();
             this.btnSterge = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageBiblia = new System.Windows.Forms.TabPage();
+            this.dgvBiblia = new System.Windows.Forms.DataGridView();
+            this.txtCautareBiblia = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPageCANTARI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
+            this.tabPageBiblia.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -151,8 +158,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPageCANTARI);
+            this.tabControl1.Controls.Add(this.tabPageBiblia);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -161,23 +168,23 @@
             this.tabControl1.Size = new System.Drawing.Size(828, 743);
             this.tabControl1.TabIndex = 11;
             // 
-            // tabPage2
+            // tabPageCANTARI
             // 
-            this.tabPage2.Controls.Add(this.checkBoxBetel);
-            this.tabPage2.Controls.Add(this.dgwlista);
-            this.tabPage2.Controls.Add(this.labelTitlu);
-            this.tabPage2.Controls.Add(this.btnAdaugaCantareNoua);
-            this.tabPage2.Controls.Add(this.buttonModifica);
-            this.tabPage2.Controls.Add(this.flowStrofe);
-            this.tabPage2.Controls.Add(this.txtCautare);
-            this.tabPage2.Controls.Add(this.btnSterge);
-            this.tabPage2.Location = new System.Drawing.Point(4, 34);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(820, 705);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Lista Cantari";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageCANTARI.Controls.Add(this.checkBoxBetel);
+            this.tabPageCANTARI.Controls.Add(this.dgwlista);
+            this.tabPageCANTARI.Controls.Add(this.labelTitlu);
+            this.tabPageCANTARI.Controls.Add(this.btnAdaugaCantareNoua);
+            this.tabPageCANTARI.Controls.Add(this.buttonModifica);
+            this.tabPageCANTARI.Controls.Add(this.flowStrofe);
+            this.tabPageCANTARI.Controls.Add(this.txtCautare);
+            this.tabPageCANTARI.Controls.Add(this.btnSterge);
+            this.tabPageCANTARI.Location = new System.Drawing.Point(4, 34);
+            this.tabPageCANTARI.Name = "tabPageCANTARI";
+            this.tabPageCANTARI.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCANTARI.Size = new System.Drawing.Size(820, 705);
+            this.tabPageCANTARI.TabIndex = 1;
+            this.tabPageCANTARI.Text = "Lista Cantari";
+            this.tabPageCANTARI.UseVisualStyleBackColor = true;
             // 
             // checkBoxBetel
             // 
@@ -274,14 +281,53 @@
             this.btnSterge.UseVisualStyleBackColor = true;
             this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
             // 
-            // tabPage1
+            // tabPageBiblia
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 34);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(820, 705);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageBiblia.Controls.Add(this.label3);
+            this.tabPageBiblia.Controls.Add(this.dgvBiblia);
+            this.tabPageBiblia.Controls.Add(this.txtCautareBiblia);
+            this.tabPageBiblia.Location = new System.Drawing.Point(4, 34);
+            this.tabPageBiblia.Name = "tabPageBiblia";
+            this.tabPageBiblia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageBiblia.Size = new System.Drawing.Size(820, 705);
+            this.tabPageBiblia.TabIndex = 0;
+            this.tabPageBiblia.Text = "BIBLIA";
+            this.tabPageBiblia.UseVisualStyleBackColor = true;
+            // 
+            // dgvBiblia
+            // 
+            this.dgvBiblia.AllowUserToAddRows = false;
+            this.dgvBiblia.AllowUserToDeleteRows = false;
+            this.dgvBiblia.AllowUserToResizeColumns = false;
+            this.dgvBiblia.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBiblia.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvBiblia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvBiblia.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dgvBiblia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBiblia.ColumnHeadersVisible = false;
+            this.dgvBiblia.Location = new System.Drawing.Point(6, 129);
+            this.dgvBiblia.MultiSelect = false;
+            this.dgvBiblia.Name = "dgvBiblia";
+            this.dgvBiblia.ReadOnly = true;
+            this.dgvBiblia.RowHeadersVisible = false;
+            this.dgvBiblia.RowHeadersWidth = 51;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBiblia.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvBiblia.RowTemplate.Height = 24;
+            this.dgvBiblia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBiblia.Size = new System.Drawing.Size(786, 463);
+            this.dgvBiblia.TabIndex = 1;
+            this.dgvBiblia.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_RowEnter);
+            // 
+            // txtCautareBiblia
+            // 
+            this.txtCautareBiblia.Location = new System.Drawing.Point(64, 54);
+            this.txtCautareBiblia.Name = "txtCautareBiblia";
+            this.txtCautareBiblia.Size = new System.Drawing.Size(260, 30);
+            this.txtCautareBiblia.TabIndex = 0;
+            this.txtCautareBiblia.TextChanged += new System.EventHandler(this.txtCautareBiblia_TextChanged);
+            this.txtCautareBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyDown);
             // 
             // tabPage3
             // 
@@ -332,6 +378,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(348, 52);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(164, 25);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Exemplu: Mat 3 5";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -353,9 +408,12 @@
             this.Text = "Afisare Cantari   - by Cristty";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPrincipal_KeyDown);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPageCANTARI.ResumeLayout(false);
+            this.tabPageCANTARI.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).EndInit();
+            this.tabPageBiblia.ResumeLayout(false);
+            this.tabPageBiblia.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -376,8 +434,8 @@
         private System.Windows.Forms.Button btnCuloareText;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageBiblia;
+        private System.Windows.Forms.TabPage tabPageCANTARI;
         private System.Windows.Forms.Button btnSterge;
         private System.Windows.Forms.TextBox txtCautare;
         private System.Windows.Forms.FlowLayoutPanel flowStrofe;
@@ -390,5 +448,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBoxBetel;
+        private System.Windows.Forms.DataGridView dgvBiblia;
+        private System.Windows.Forms.TextBox txtCautareBiblia;
+        private System.Windows.Forms.Label label3;
     }
 }

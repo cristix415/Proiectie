@@ -142,7 +142,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <Content Include="db.db" Condition="!Exists('db.db')">
+    <Content Include="db.db" Condition="Exists('db.db')">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

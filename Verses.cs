@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace ProiectareCantari
 {
     public class Verses
     {
+        [Browsable(false)] 
         public int book_number { get; set; }
         public int chapter { get; set; }
         public int verse { get; set; }

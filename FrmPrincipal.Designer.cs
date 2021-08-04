@@ -60,6 +60,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanelBiblia = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnRef = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageCANTARI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
@@ -302,6 +303,7 @@
             // 
             // tabPageBiblia
             // 
+            this.tabPageBiblia.Controls.Add(this.btnRef);
             this.tabPageBiblia.Controls.Add(this.flowLayoutPanelBiblia);
             this.tabPageBiblia.Controls.Add(this.label3);
             this.tabPageBiblia.Controls.Add(this.dgvBiblia);
@@ -351,6 +353,7 @@
             this.dgvBiblia.Size = new System.Drawing.Size(590, 376);
             this.dgvBiblia.TabIndex = 1;
             this.dgvBiblia.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_RowEnter);
+            this.dgvBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvBiblia_KeyDown);
             // 
             // txtCautareBiblia
             // 
@@ -425,6 +428,14 @@
             this.flowLayoutPanelBiblia.TabIndex = 3;
             this.flowLayoutPanelBiblia.WrapContents = false;
             // 
+            // btnRef
+            // 
+            this.btnRef.Location = new System.Drawing.Point(434, 78);
+            this.btnRef.Name = "btnRef";
+            this.btnRef.Size = new System.Drawing.Size(247, 27);
+            this.btnRef.TabIndex = 4;
+            this.btnRef.UseVisualStyleBackColor = true;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -491,5 +502,6 @@
         private System.Windows.Forms.TextBox txtCautareBiblia;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBiblia;
+        private System.Windows.Forms.Button btnRef;
     }
 }

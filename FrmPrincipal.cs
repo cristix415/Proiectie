@@ -57,7 +57,7 @@ namespace ProiectareCantari
 
                 //incarcare cantari in memorie
                 LoadCantari();
-                
+
                 // bind lista de cantari la controlul DrataGrivView
                 BindCantari();
 
@@ -163,8 +163,8 @@ namespace ProiectareCantari
 
         }
         private void ProiecteazaCantare(Rectangle workingArea)
-        {          
-                formSecondMonitor.Show();
+        {
+            formSecondMonitor.Show();
         }
         private void CreazaSlide(CantareFormatata cantare)
         {
@@ -498,7 +498,7 @@ namespace ProiectareCantari
         private void button1_Click(object sender, EventArgs e)
         {
             if (formSecondMonitor != null)
-            formSecondMonitor.Hide();
+                formSecondMonitor.Hide();
             if (_formBiblie != null)
                 _formBiblie.Hide();
 
@@ -670,8 +670,24 @@ namespace ProiectareCantari
 
         private void txtCautareBiblia_KeyDown(object sender, KeyEventArgs e)
         {
+            _carte = null;
             try
             {
+
+                var carteString = txtCautareBiblia.Text.Split()[0].ToLower();
+                _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(carteString) || x.short_name.ToLower().Contains(carteString)).FirstOrDefault();
+
+                if (_carte != null)
+                {
+                    btnRef.Text = _carte.short_name;
+                }
+                else
+                {
+                    _carte = null;
+                    btnRef.Text = "Cartea nu exista";
+                }
+
+
                 if (e.KeyCode == Keys.Enter)
                 {
                     var txtCautare = Regex.Replace(txtCautareBiblia.Text.ToLower(), @"\s+", " ");
@@ -681,17 +697,22 @@ namespace ProiectareCantari
                         referinta = txtCautare.ToLower().Split();
                     else
                         referinta = (txtCautare.ToLower() + " 1").Split();
+                    int versetNumar = Convert.ToInt32(referinta[2]) - 1;
 
 
                     _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
                     if (_carte != null)
                     {
                         CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+                        BindingSource binding = new BindingSource();
+                        binding.DataSource = _listaVersete;
+                        dgvBiblia.DataSource = binding;
+
+                        dgvBiblia.Rows[Convert.ToInt32(referinta[2]) - 1].Selected = true;
+                        dgvBiblia.CurrentCell = dgvBiblia.Rows[versetNumar].Cells[0];
 
                     }
-                    BindingSource binding = new BindingSource();
-                    binding.DataSource = _listaVersete;
-                    dgvBiblia.DataSource = binding;
+                    dgvBiblia.Focus();
 
 
                 }
@@ -736,6 +757,7 @@ namespace ProiectareCantari
                 ctrlCarte.Width = 170;
                 ctrlCarte.Height = 35;
                 ctrlCarte.Text = carte.short_name;
+                ctrlCarte.Name = carte.short_name;
                 flowLayoutPanelBiblia.Controls.Add(ctrlCarte);
                 flowLayoutPanelBiblia.AutoScroll = true;
                 flowLayoutPanelBiblia.HorizontalScroll.Enabled = false;
@@ -778,7 +800,7 @@ namespace ProiectareCantari
         }
         private void txtCautareBiblia_TextChanged(object sender, EventArgs e)
         {
- 
+
         }
 
         private void dgvBiblia_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -798,12 +820,27 @@ namespace ProiectareCantari
                     _formBiblie.Height = _screen.WorkingArea.Height + 10;
                     _formBiblie.WindowState = FormWindowState.Maximized;
                     _formBiblie.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-   
+
                 }
                 _formBiblie.Show();
                 _formBiblie.BindVerset(verset);
                 _formBiblie.BringToFront();
                 this.BringToFront();
+
+            }
+        }
+
+        private void dgvBiblia_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (formSecondMonitor != null)
+                    formSecondMonitor.Hide();
+                if (_formBiblie != null)
+                    _formBiblie.Hide();
+
+                foreach (Label ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Color.White;
 
             }
         }

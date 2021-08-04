@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -54,13 +55,20 @@ namespace ProiectareCantari
                 formSecondMonitor.WindowState = FormWindowState.Maximized;
                 formSecondMonitor.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
-
+                //incarcare cantari in memorie
                 LoadCantari();
+                
+                // bind lista de cantari la controlul DrataGrivView
                 BindCantari();
+
+                // incarcarea in menorie a cartilor din biblie
                 LoadCarti();
+                // incarcarea in menorie a cartilor din biblie
+                BindCarti();
             }
             catch (Exception ex)
             {
+                // afisare erori
                 MessageBox.Show(ex.Message);
             }
 
@@ -155,18 +163,8 @@ namespace ProiectareCantari
 
         }
         private void ProiecteazaCantare(Rectangle workingArea)
-        {
-            if (formSecondMonitor == null)
-            {
-
+        {          
                 formSecondMonitor.Show();
-            }
-            else
-            {
-                formSecondMonitor.Show();
-            }
-
-
         }
         private void CreazaSlide(CantareFormatata cantare)
         {
@@ -475,6 +473,7 @@ namespace ProiectareCantari
 
                 formSecondMonitor.BindStrofa(lblStrofa.Text);
                 formSecondMonitor.BringToFront();
+                // deschide formularul de cantare pe monitorul 2 fullscreen
                 ProiecteazaCantare(_screen.WorkingArea);
                 button1.Focus();
             }
@@ -563,7 +562,7 @@ namespace ProiectareCantari
             }
             catch (Exception ex)
             {
-                MessageBox.Show("DOAR NUMERE SUNT PERMISE");
+                MessageBox.Show("DOAR CIFRE SUNT PERMISE");
             }
             button1.Focus();
         }
@@ -671,21 +670,35 @@ namespace ProiectareCantari
 
         private void txtCautareBiblia_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                string[] referinta = txtCautareBiblia.Text.ToLower().Split(' ');
-
-                _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
-                if (_carte != null)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+                    var txtCautare = Regex.Replace(txtCautareBiblia.Text.ToLower(), @"\s+", " ");
+                    int refe = txtCautare.ToLower().Split().Length;
+                    string[] referinta;
+                    if (refe < 2)
+                        referinta = txtCautare.ToLower().Split();
+                    else
+                        referinta = (txtCautare.ToLower() + " 1").Split();
+
+
+                    _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
+                    if (_carte != null)
+                    {
+                        CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+
+                    }
+                    BindingSource binding = new BindingSource();
+                    binding.DataSource = _listaVersete;
+                    dgvBiblia.DataSource = binding;
+
 
                 }
-                BindingSource binding = new BindingSource();
-                binding.DataSource = _listaVersete;
-                dgvBiblia.DataSource = binding;
-
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare - VERIFICA CUM AI SCRIS");
             }
         }
 
@@ -715,6 +728,20 @@ namespace ProiectareCantari
 
             }
         }
+        private void BindCarti()
+        {
+            foreach (var carte in _listaCarti)
+            {
+                var ctrlCarte = new Button();
+                ctrlCarte.Width = 170;
+                ctrlCarte.Height = 35;
+                ctrlCarte.Text = carte.short_name;
+                flowLayoutPanelBiblia.Controls.Add(ctrlCarte);
+                flowLayoutPanelBiblia.AutoScroll = true;
+                flowLayoutPanelBiblia.HorizontalScroll.Enabled = false;
+                flowLayoutPanelBiblia.HorizontalScroll.Visible = false;
+            }
+        }
         private void CautaVerset(int carte, int capitol, int verset)
         {
             _listaVersete.Clear();
@@ -736,6 +763,11 @@ namespace ProiectareCantari
                         int verse = Convert.ToInt32(sqlReader["verse"]);
                         string text = (string)sqlReader["text"];
 
+                        text = Regex.Replace(text, "<.*?>", string.Empty);
+                        text = Regex.Replace(text, "[.*]>", string.Empty);
+
+                        text = Regex.Replace(text, @"[\u24D0-\u24E9]+", string.Empty);
+
                         Verses versett = new Verses(book_number, chapter, verse, text);
 
                         _listaVersete.Add(versett);
@@ -744,7 +776,6 @@ namespace ProiectareCantari
 
             }
         }
-
         private void txtCautareBiblia_TextChanged(object sender, EventArgs e)
         {
  

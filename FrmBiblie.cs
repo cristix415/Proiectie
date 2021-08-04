@@ -14,6 +14,8 @@ namespace ProiectareCantari
         public FrmBiblie(Screen _screen)
         {
             InitializeComponent();
+
+            //initializare setari la fiecare deschidere a formularului
             lblReferinta.Font = new Font("Arial" ,80);
             lblVerset.Font = new Font("Arial", 80);
             lblReferinta.Width = _screen.WorkingArea.Width;
@@ -26,6 +28,7 @@ namespace ProiectareCantari
         }
         public void BindVerset(Verses verset)
         {
+            //actualizare verset
             lblReferinta.BackColor = Properties.Settings.Default.CuloareFundal;
             lblReferinta.ForeColor = Properties.Settings.Default.CuloareText;
             lblVerset.BackColor = Properties.Settings.Default.CuloareFundal;

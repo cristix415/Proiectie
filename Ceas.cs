@@ -16,6 +16,7 @@ namespace ProiectareCantari
             InitializeComponent();
             lblTime.Font = new Font("Arial", Properties.Settings.Default.MarimeCeas, FontStyle.Bold);
             
+            // functie care actualizeaza ceasul
             StartTimer();
 
         }

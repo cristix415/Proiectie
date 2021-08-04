@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ProiectareCantari
 {
+    // obiectul Cantare
     public class Cantare
     {
         public int Id { get; set; }

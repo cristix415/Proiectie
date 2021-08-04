@@ -37,7 +37,6 @@ namespace ProiectareCantari
 
             try
             {
-
                 tabControl1.TabPages.Remove(tabPage3);
 
                 if (Screen.AllScreens.Length > 1)
@@ -475,7 +474,7 @@ namespace ProiectareCantari
                 formSecondMonitor.BringToFront();
                 // deschide formularul de cantare pe monitorul 2 fullscreen
                 ProiecteazaCantare(_screen.WorkingArea);
-                button1.Focus();
+
             }
             else
                 MessageBox.Show($"Monitor does not exists.");
@@ -564,7 +563,6 @@ namespace ProiectareCantari
             {
                 MessageBox.Show("DOAR CIFRE SUNT PERMISE");
             }
-            button1.Focus();
         }
 
 
@@ -670,59 +668,33 @@ namespace ProiectareCantari
 
         private void txtCautareBiblia_KeyDown(object sender, KeyEventArgs e)
         {
-            _carte = null;
-            try
-            {
 
-                var carteString = txtCautareBiblia.Text.Split()[0].ToLower();
-                _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(carteString) || x.short_name.ToLower().Contains(carteString)).FirstOrDefault();
-
-                if (_carte != null)
-                {
-                    btnRef.Text = _carte.short_name;
-                }
-                else
-                {
-                    _carte = null;
-                    btnRef.Text = "Cartea nu exista";
-                }
-
-
-                if (e.KeyCode == Keys.Enter)
-                {
-                    var txtCautare = Regex.Replace(txtCautareBiblia.Text.ToLower(), @"\s+", " ");
-                    int refe = txtCautare.ToLower().Split().Length;
-                    string[] referinta;
-                    if (refe < 2)
-                        referinta = txtCautare.ToLower().Split();
-                    else
-                        referinta = (txtCautare.ToLower() + " 1").Split();
-                    int versetNumar = Convert.ToInt32(referinta[2]) - 1;
-
-
-                    _carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
-                    if (_carte != null)
-                    {
-                        CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
-                        BindingSource binding = new BindingSource();
-                        binding.DataSource = _listaVersete;
-                        dgvBiblia.DataSource = binding;
-
-                        dgvBiblia.Rows[Convert.ToInt32(referinta[2]) - 1].Selected = true;
-                        dgvBiblia.CurrentCell = dgvBiblia.Rows[versetNumar].Cells[0];
-
-                    }
-                    dgvBiblia.Focus();
-
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Eroare - VERIFICA CUM AI SCRIS");
-            }
         }
+        private void AdaugaIstoric(Book carte, int capitol, int verset)
+        {
+            var button = new MyButton();
+            button.Text = carte.short_name + " " + capitol + ":" + verset;
+            button.Width = 150;
+            button.carte = carte;
+            button.verset = verset;
+            button.capitol = capitol;
+            button.Click += (s, e) =>
+            {
+                CautaVerset(carte.book_number, capitol, verset - 1);
+                BindingSource binding = new BindingSource();
+                binding.DataSource = _listaVersete;
+                dgvBiblia.DataSource = binding;
+                dgvBiblia.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBiblia.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                btnRef.Text = carte.short_name + " " + capitol + ":" + verset;
+                //    dgvBiblia.Rows[verset-1].Selected = true;
+                dgvBiblia.CurrentCell = dgvBiblia.Rows[verset - 1].Cells[0];
 
+                dgvBiblia.Focus();
+
+            };
+            flowLayoutPanelIstoric.Controls.Add(button);
+        }
         private void LoadCarti()
         {
             const string stringSqlBooks = "SELECT * FROM Books";
@@ -805,7 +777,13 @@ namespace ProiectareCantari
 
         private void dgvBiblia_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvBiblia.SelectedRows.Count > 0)
+            AfisareBiblie();
+
+        }
+        private void AfisareBiblie()
+        {
+
+            if (dgvBiblia.SelectedRows.Count > 0 && checkBox1.Checked)
             {
                 Verses verset = (dgvBiblia.SelectedRows[0].DataBoundItem) as Verses;
 
@@ -823,13 +801,12 @@ namespace ProiectareCantari
 
                 }
                 _formBiblie.Show();
-                _formBiblie.BindVerset(verset);
+                _formBiblie.BindVerset(_carte, verset);
                 _formBiblie.BringToFront();
                 this.BringToFront();
 
             }
         }
-
         private void dgvBiblia_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -841,8 +818,106 @@ namespace ProiectareCantari
 
                 foreach (Label ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
+                checkBox1.Checked = false;
+
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                checkBox1.Checked = true;
+                AfisareBiblie();
 
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                if (formSecondMonitor != null)
+                    formSecondMonitor.Hide();
+                if (_formBiblie != null)
+                    _formBiblie.Hide();
+
+                foreach (Label ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Color.White;
+            }
+            dgvBiblia.Focus();
+        }
+
+        private void dgvBiblia_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            checkBox1.Checked = true;
+            AfisareBiblie();
+        }
+
+        private void txtCautareBiblia_KeyUp(object sender, KeyEventArgs e)
+        {
+            _carte = null;
+            try
+            {
+
+                string carteString = txtCautareBiblia.Text.Split()[0].ToLower();
+                var ccarteString = carteString.Replace(" ", string.Empty);
+
+
+                //_carte = _listaCarti.Where(x => x.long_name.ToLower().StartsWith(carteString) || x.short_name.ToLower().StartsWith(carteString)).FirstOrDefault();
+                _carte = _listaCarti.Where(x => x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
+
+                if (_carte != null)
+                {
+                    btnRef.Text = _carte.short_name;
+                }
+                else
+                {
+                    _carte = null;
+                    btnRef.Text = "Cartea nu exista";
+                }
+
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    var txtCautare = Regex.Replace(txtCautareBiblia.Text.ToLower(), @"\s+", " ");
+                    int refe = txtCautare.ToLower().Split().Length;
+                    string[] referinta;
+                    if (refe > 2)
+                        referinta = txtCautare.ToLower().Split();
+                    else
+                        referinta = (txtCautare.ToLower() + " 1").Split();
+                    int versetNumar = Convert.ToInt32(referinta[2]) - 1;
+
+
+                    //_carte = _listaCarti.Where(x => x.long_name.ToLower().Contains(referinta[0]) || x.short_name.ToLower().Contains(referinta[0])).FirstOrDefault();
+                    if (_carte != null)
+                    {
+                        btnRef.Text = btnRef.Text + " " + referinta[1];
+                        CautaVerset(_carte.book_number, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+                        BindingSource binding = new BindingSource();
+                        binding.DataSource = _listaVersete;
+                        dgvBiblia.DataSource = binding;
+                        dgvBiblia.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        dgvBiblia.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        dgvBiblia.Rows[Convert.ToInt32(referinta[2]) - 1].Selected = true;
+                        dgvBiblia.CurrentCell = dgvBiblia.Rows[versetNumar].Cells[0];
+                        dgvBiblia.Focus();
+
+                        AdaugaIstoric(_carte, Convert.ToInt32(referinta[1]), Convert.ToInt32(referinta[2]));
+
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare - VERIFICA CUM AI SCRIS");
+            }
+        }
+    }
+    public class MyButton : Button
+    {
+        public int verset { get; set; }
+        public int capitol { get; set; }
+        public Book carte { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace ProiectareCantari
             lblVerset.TextAlign = ContentAlignment.MiddleCenter;
             lblReferinta.Padding = new Padding(0, 0, 0, 0);
         }
-        public void BindVerset(Verses verset)
+        public void BindVerset(Book carte, Verses verset)
         {
             //actualizare verset
             lblReferinta.BackColor = Properties.Settings.Default.CuloareFundal;
@@ -34,7 +34,7 @@ namespace ProiectareCantari
             lblVerset.BackColor = Properties.Settings.Default.CuloareFundal;
             lblVerset.ForeColor = Properties.Settings.Default.CuloareText;
             lblVerset.Text = verset.text;
-            lblReferinta.Text = verset.chapter + " : " + verset.verse;
+            lblReferinta.Text = carte.long_name + " "+  verset.chapter + " : " + verset.verse;
             Helper.MeasureStringMin(lblReferinta, 90);
             Helper.MeasureStringMin(lblVerset, 90);
         }

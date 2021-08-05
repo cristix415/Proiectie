@@ -173,7 +173,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(973, 729);
+            this.tabControl1.Size = new System.Drawing.Size(973, 673);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPageBiblia
@@ -188,7 +188,7 @@
             this.tabPageBiblia.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageBiblia.Name = "tabPageBiblia";
             this.tabPageBiblia.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageBiblia.Size = new System.Drawing.Size(965, 696);
+            this.tabPageBiblia.Size = new System.Drawing.Size(965, 640);
             this.tabPageBiblia.TabIndex = 0;
             this.tabPageBiblia.Text = "BIBLIA";
             this.tabPageBiblia.UseVisualStyleBackColor = true;
@@ -215,7 +215,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.flowLayoutPanelBiblia);
-            this.groupBox4.Location = new System.Drawing.Point(12, 142);
+            this.groupBox4.Location = new System.Drawing.Point(12, 21);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(230, 346);
             this.groupBox4.TabIndex = 7;
@@ -236,7 +236,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.flowLayoutPanelIstoric);
-            this.groupBox3.Location = new System.Drawing.Point(12, 500);
+            this.groupBox3.Location = new System.Drawing.Point(12, 373);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(230, 186);
             this.groupBox3.TabIndex = 8;
@@ -267,7 +267,7 @@
             // 
             this.groupBox1.Controls.Add(this.txtCautareBiblia);
             this.groupBox1.Controls.Add(this.btnRef);
-            this.groupBox1.Location = new System.Drawing.Point(12, 19);
+            this.groupBox1.Location = new System.Drawing.Point(255, 19);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(230, 102);
             this.groupBox1.TabIndex = 6;
@@ -337,7 +337,7 @@
             this.tabPageCANTARI.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCANTARI.Name = "tabPageCANTARI";
             this.tabPageCANTARI.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageCANTARI.Size = new System.Drawing.Size(965, 721);
+            this.tabPageCANTARI.Size = new System.Drawing.Size(965, 696);
             this.tabPageCANTARI.TabIndex = 1;
             this.tabPageCANTARI.Text = "Lista Cantari";
             this.tabPageCANTARI.UseVisualStyleBackColor = true;
@@ -451,7 +451,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(965, 721);
+            this.tabPage3.Size = new System.Drawing.Size(965, 696);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Cantari INTERNET";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -513,7 +513,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1320, 745);
+            this.ClientSize = new System.Drawing.Size(1320, 690);
             this.Controls.Add(this.checkBoxLive);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCuloareText);

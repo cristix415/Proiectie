@@ -84,7 +84,7 @@
             // 
             this.checkBoxClock.AutoSize = true;
             this.checkBoxClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxClock.Location = new System.Drawing.Point(1020, 661);
+            this.checkBoxClock.Location = new System.Drawing.Point(1020, 601);
             this.checkBoxClock.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxClock.Name = "checkBoxClock";
             this.checkBoxClock.Size = new System.Drawing.Size(131, 28);
@@ -97,7 +97,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1025, 703);
+            this.label1.Location = new System.Drawing.Point(1025, 643);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 24);
@@ -107,7 +107,7 @@
             // textBoxMarime
             // 
             this.textBoxMarime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxMarime.Location = new System.Drawing.Point(1105, 703);
+            this.textBoxMarime.Location = new System.Drawing.Point(1105, 643);
             this.textBoxMarime.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMarime.Name = "textBoxMarime";
             this.textBoxMarime.Size = new System.Drawing.Size(41, 29);
@@ -173,7 +173,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(973, 754);
+            this.tabControl1.Size = new System.Drawing.Size(973, 729);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPageBiblia
@@ -188,7 +188,7 @@
             this.tabPageBiblia.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageBiblia.Name = "tabPageBiblia";
             this.tabPageBiblia.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageBiblia.Size = new System.Drawing.Size(965, 721);
+            this.tabPageBiblia.Size = new System.Drawing.Size(965, 696);
             this.tabPageBiblia.TabIndex = 0;
             this.tabPageBiblia.Text = "BIBLIA";
             this.tabPageBiblia.UseVisualStyleBackColor = true;
@@ -217,7 +217,7 @@
             this.groupBox4.Controls.Add(this.flowLayoutPanelBiblia);
             this.groupBox4.Location = new System.Drawing.Point(12, 142);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(230, 381);
+            this.groupBox4.Size = new System.Drawing.Size(230, 346);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Carti";
@@ -229,14 +229,14 @@
             this.flowLayoutPanelBiblia.Location = new System.Drawing.Point(6, 30);
             this.flowLayoutPanelBiblia.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelBiblia.Name = "flowLayoutPanelBiblia";
-            this.flowLayoutPanelBiblia.Size = new System.Drawing.Size(200, 343);
+            this.flowLayoutPanelBiblia.Size = new System.Drawing.Size(200, 302);
             this.flowLayoutPanelBiblia.TabIndex = 3;
             this.flowLayoutPanelBiblia.WrapContents = false;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.flowLayoutPanelIstoric);
-            this.groupBox3.Location = new System.Drawing.Point(12, 530);
+            this.groupBox3.Location = new System.Drawing.Point(12, 500);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(230, 186);
             this.groupBox3.TabIndex = 8;
@@ -281,7 +281,6 @@
             this.txtCautareBiblia.Name = "txtCautareBiblia";
             this.txtCautareBiblia.Size = new System.Drawing.Size(196, 26);
             this.txtCautareBiblia.TabIndex = 0;
-            
             this.txtCautareBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyDown);
             this.txtCautareBiblia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyUp);
             // 
@@ -514,7 +513,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1320, 775);
+            this.ClientSize = new System.Drawing.Size(1320, 745);
             this.Controls.Add(this.checkBoxLive);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCuloareText);
@@ -527,7 +526,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
             this.Text = "Afisare Cantari   - by Cristty";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPrincipal_KeyDown);

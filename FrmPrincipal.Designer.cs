@@ -60,7 +60,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxLive = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPageBiblia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).BeginInit();
@@ -68,13 +74,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxClock
             // 
             this.checkBoxClock.AutoSize = true;
             this.checkBoxClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxClock.Location = new System.Drawing.Point(999, 491);
+            this.checkBoxClock.Location = new System.Drawing.Point(1020, 661);
             this.checkBoxClock.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxClock.Name = "checkBoxClock";
             this.checkBoxClock.Size = new System.Drawing.Size(131, 28);
@@ -87,7 +97,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1004, 533);
+            this.label1.Location = new System.Drawing.Point(1025, 703);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 24);
@@ -97,7 +107,7 @@
             // textBoxMarime
             // 
             this.textBoxMarime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxMarime.Location = new System.Drawing.Point(1084, 533);
+            this.textBoxMarime.Location = new System.Drawing.Point(1105, 703);
             this.textBoxMarime.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMarime.Name = "textBoxMarime";
             this.textBoxMarime.Size = new System.Drawing.Size(41, 29);
@@ -163,47 +173,55 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(973, 726);
+            this.tabControl1.Size = new System.Drawing.Size(973, 754);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPageBiblia
             // 
-            this.tabPageBiblia.Controls.Add(this.flowLayoutPanelIstoric);
-            this.tabPageBiblia.Controls.Add(this.btnRef);
-            this.tabPageBiblia.Controls.Add(this.flowLayoutPanelBiblia);
+            this.tabPageBiblia.Controls.Add(this.groupBox5);
+            this.tabPageBiblia.Controls.Add(this.groupBox4);
+            this.tabPageBiblia.Controls.Add(this.groupBox3);
+            this.tabPageBiblia.Controls.Add(this.groupBox2);
+            this.tabPageBiblia.Controls.Add(this.groupBox1);
             this.tabPageBiblia.Controls.Add(this.dgvBiblia);
-            this.tabPageBiblia.Controls.Add(this.txtCautareBiblia);
             this.tabPageBiblia.Location = new System.Drawing.Point(4, 29);
             this.tabPageBiblia.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageBiblia.Name = "tabPageBiblia";
             this.tabPageBiblia.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageBiblia.Size = new System.Drawing.Size(965, 693);
+            this.tabPageBiblia.Size = new System.Drawing.Size(965, 721);
             this.tabPageBiblia.TabIndex = 0;
             this.tabPageBiblia.Text = "BIBLIA";
             this.tabPageBiblia.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanelIstoric
             // 
-            this.flowLayoutPanelIstoric.Location = new System.Drawing.Point(29, 543);
+            this.flowLayoutPanelIstoric.AutoScroll = true;
+            this.flowLayoutPanelIstoric.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelIstoric.Location = new System.Drawing.Point(6, 29);
+            this.flowLayoutPanelIstoric.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelIstoric.Name = "flowLayoutPanelIstoric";
-            this.flowLayoutPanelIstoric.Size = new System.Drawing.Size(194, 136);
+            this.flowLayoutPanelIstoric.Size = new System.Drawing.Size(209, 154);
             this.flowLayoutPanelIstoric.TabIndex = 5;
+            this.flowLayoutPanelIstoric.WrapContents = false;
             // 
             // btnRef
             // 
-            this.btnRef.Location = new System.Drawing.Point(255, 87);
+            this.btnRef.BackColor = System.Drawing.Color.White;
+            this.btnRef.Location = new System.Drawing.Point(19, 59);
             this.btnRef.Name = "btnRef";
-            this.btnRef.Size = new System.Drawing.Size(213, 27);
+            this.btnRef.Size = new System.Drawing.Size(196, 27);
             this.btnRef.TabIndex = 4;
-            this.btnRef.UseVisualStyleBackColor = true;
+            this.btnRef.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRef.UseVisualStyleBackColor = false;
             // 
             // flowLayoutPanelBiblia
             // 
             this.flowLayoutPanelBiblia.AutoScroll = true;
             this.flowLayoutPanelBiblia.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelBiblia.Location = new System.Drawing.Point(27, 120);
+            this.flowLayoutPanelBiblia.Location = new System.Drawing.Point(6, 30);
+            this.flowLayoutPanelBiblia.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelBiblia.Name = "flowLayoutPanelBiblia";
-            this.flowLayoutPanelBiblia.Size = new System.Drawing.Size(200, 376);
+            this.flowLayoutPanelBiblia.Size = new System.Drawing.Size(200, 343);
             this.flowLayoutPanelBiblia.TabIndex = 3;
             this.flowLayoutPanelBiblia.WrapContents = false;
             // 
@@ -219,7 +237,7 @@
             this.dgvBiblia.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgvBiblia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBiblia.ColumnHeadersVisible = false;
-            this.dgvBiblia.Location = new System.Drawing.Point(255, 120);
+            this.dgvBiblia.Location = new System.Drawing.Point(255, 161);
             this.dgvBiblia.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBiblia.MultiSelect = false;
             this.dgvBiblia.Name = "dgvBiblia";
@@ -238,7 +256,7 @@
             // 
             // txtCautareBiblia
             // 
-            this.txtCautareBiblia.Location = new System.Drawing.Point(27, 46);
+            this.txtCautareBiblia.Location = new System.Drawing.Point(19, 33);
             this.txtCautareBiblia.Margin = new System.Windows.Forms.Padding(2);
             this.txtCautareBiblia.Name = "txtCautareBiblia";
             this.txtCautareBiblia.Size = new System.Drawing.Size(196, 26);
@@ -261,7 +279,7 @@
             this.tabPageCANTARI.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCANTARI.Name = "tabPageCANTARI";
             this.tabPageCANTARI.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageCANTARI.Size = new System.Drawing.Size(965, 693);
+            this.tabPageCANTARI.Size = new System.Drawing.Size(965, 721);
             this.tabPageCANTARI.TabIndex = 1;
             this.tabPageCANTARI.Text = "Lista Cantari";
             this.tabPageCANTARI.UseVisualStyleBackColor = true;
@@ -269,8 +287,6 @@
             // checkBoxBetel
             // 
             this.checkBoxBetel.AutoSize = true;
-            this.checkBoxBetel.Checked = true;
-            this.checkBoxBetel.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxBetel.Location = new System.Drawing.Point(239, 15);
             this.checkBoxBetel.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxBetel.Name = "checkBoxBetel";
@@ -422,25 +438,83 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // checkBox1
+            // checkBoxLive
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.ForeColor = System.Drawing.Color.Red;
-            this.checkBox1.Location = new System.Drawing.Point(1026, 211);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(125, 50);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "LIVE";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBoxLive.AutoSize = true;
+            this.checkBoxLive.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxLive.ForeColor = System.Drawing.Color.Red;
+            this.checkBoxLive.Location = new System.Drawing.Point(1026, 211);
+            this.checkBoxLive.Name = "checkBoxLive";
+            this.checkBoxLive.Size = new System.Drawing.Size(125, 50);
+            this.checkBoxLive.TabIndex = 12;
+            this.checkBoxLive.Text = "LIVE";
+            this.checkBoxLive.UseVisualStyleBackColor = true;
+            this.checkBoxLive.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtCautareBiblia);
+            this.groupBox1.Controls.Add(this.btnRef);
+            this.groupBox1.Location = new System.Drawing.Point(12, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 102);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Referinta";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(-36, -85);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.flowLayoutPanelIstoric);
+            this.groupBox3.Location = new System.Drawing.Point(12, 530);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(230, 186);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Istoric";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.flowLayoutPanelBiblia);
+            this.groupBox4.Location = new System.Drawing.Point(12, 142);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(230, 381);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Carti";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textBox2);
+            this.groupBox5.Location = new System.Drawing.Point(701, 19);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(230, 86);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Cautare";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(19, 33);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(196, 26);
+            this.textBox2.TabIndex = 0;
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1320, 775);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBoxLive);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCuloareText);
             this.Controls.Add(this.btnCuloareFundal);
@@ -458,7 +532,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPrincipal_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPageBiblia.ResumeLayout(false);
-            this.tabPageBiblia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).EndInit();
             this.tabPageCANTARI.ResumeLayout(false);
             this.tabPageCANTARI.PerformLayout();
@@ -466,6 +539,12 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,7 +579,13 @@
         private System.Windows.Forms.TextBox txtCautareBiblia;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBiblia;
         private System.Windows.Forms.Button btnRef;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxLive;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelIstoric;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }

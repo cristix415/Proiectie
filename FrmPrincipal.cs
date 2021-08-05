@@ -74,6 +74,9 @@ namespace ProiectareCantari
             textBoxMarimeCantari.Text = Properties.Settings.Default.MarimeVersuri.ToString();
             textBoxMarime.Text = Properties.Settings.Default.MarimeCeas.ToString();
             checkBoxClock.Checked = Properties.Settings.Default.FlagCeas;
+
+            flowLayoutPanelIstoric.HorizontalScroll.Enabled = false;
+            flowLayoutPanelIstoric.HorizontalScroll.Visible = false;
         }
 
         private void LoadCantari()
@@ -211,8 +214,12 @@ namespace ProiectareCantari
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
 
             //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
-            lblStrofa.Click += new EventHandler(FireClickEvent);
+            lblStrofa.Click += new EventHandler(FireClickEvent);            
+            lblStrofa.DoubleClick += (s, e) =>
+            {
+                checkBoxLive.Checked = true;
 
+            };
 
             return lblStrofa;
         }
@@ -459,25 +466,28 @@ namespace ProiectareCantari
         #endregion
         private void FireClickEvent(object sender, EventArgs e)
         {
-            foreach (Label ctl in flowStrofe.Controls)
-                ctl.ForeColor = Properties.Settings.Default.CuloareText;
-
-            Label lblStrofa = sender as Label;
-            lblStrofa.ForeColor = Color.Red;
-            lblStrofa.BorderStyle = BorderStyle.FixedSingle;
-            lblStrofa.Name = "focus";
-
-            if (_screen != null)
+            if (checkBoxLive.Checked)
             {
+                foreach (Label ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
-                formSecondMonitor.BindStrofa(lblStrofa.Text);
-                formSecondMonitor.BringToFront();
-                // deschide formularul de cantare pe monitorul 2 fullscreen
-                ProiecteazaCantare(_screen.WorkingArea);
+                Label lblStrofa = sender as Label;
+                lblStrofa.ForeColor = Color.Red;
+                lblStrofa.BorderStyle = BorderStyle.FixedSingle;
+                lblStrofa.Name = "focus";
 
+                if (_screen != null)
+                {
+
+                    formSecondMonitor.BindStrofa(lblStrofa.Text);
+                    formSecondMonitor.BringToFront();
+                    // deschide formularul de cantare pe monitorul 2 fullscreen
+                    ProiecteazaCantare(_screen.WorkingArea);
+
+                }
+                else
+                    MessageBox.Show($"Monitor does not exists.");
             }
-            else
-                MessageBox.Show($"Monitor does not exists.");
         }
 
         private void rtxtCantare_KeyDown(object sender, KeyEventArgs e)
@@ -492,6 +502,7 @@ namespace ProiectareCantari
                 foreach (Label ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
             }
+            checkBoxLive.Checked = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -675,6 +686,8 @@ namespace ProiectareCantari
             var button = new MyButton();
             button.Text = carte.short_name + " " + capitol + ":" + verset;
             button.Width = 150;
+            button.Height = 30;
+            button.Margin = new Padding(0);
             button.carte = carte;
             button.verset = verset;
             button.capitol = capitol;
@@ -728,6 +741,7 @@ namespace ProiectareCantari
                 var ctrlCarte = new Button();
                 ctrlCarte.Width = 170;
                 ctrlCarte.Height = 35;
+                ctrlCarte.Margin = new Padding(0);
                 ctrlCarte.Text = carte.short_name;
                 ctrlCarte.Name = carte.short_name;
                 flowLayoutPanelBiblia.Controls.Add(ctrlCarte);
@@ -783,7 +797,7 @@ namespace ProiectareCantari
         private void AfisareBiblie()
         {
 
-            if (dgvBiblia.SelectedRows.Count > 0 && checkBox1.Checked)
+            if (dgvBiblia.SelectedRows.Count > 0 && checkBoxLive.Checked)
             {
                 Verses verset = (dgvBiblia.SelectedRows[0].DataBoundItem) as Verses;
 
@@ -818,12 +832,12 @@ namespace ProiectareCantari
 
                 foreach (Label ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
-                checkBox1.Checked = false;
+                checkBoxLive.Checked = false;
 
             }
             if (e.KeyCode == Keys.Enter)
             {
-                checkBox1.Checked = true;
+                checkBoxLive.Checked = true;
                 AfisareBiblie();
 
             }
@@ -831,7 +845,7 @@ namespace ProiectareCantari
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!checkBox1.Checked)
+            if (!checkBoxLive.Checked)
             {
                 if (formSecondMonitor != null)
                     formSecondMonitor.Hide();
@@ -846,7 +860,7 @@ namespace ProiectareCantari
 
         private void dgvBiblia_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            checkBox1.Checked = true;
+            checkBoxLive.Checked = true;
             AfisareBiblie();
         }
 

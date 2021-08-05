@@ -518,7 +518,7 @@ namespace ProiectareCantari
 
         private void FrmPrincipal_KeyDown(object sender, KeyEventArgs e)
         {
-            Oprire(e);
+       //     Oprire(e);
         }
 
         private void button1_KeyDown(object sender, KeyEventArgs e)
@@ -874,8 +874,8 @@ namespace ProiectareCantari
                 var ccarteString = carteString.Replace(" ", string.Empty);
 
 
-                //_carte = _listaCarti.Where(x => x.long_name.ToLower().StartsWith(carteString) || x.short_name.ToLower().StartsWith(carteString)).FirstOrDefault();
-                _carte = _listaCarti.Where(x => x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
+                _carte = _listaCarti.Where(x => x.long_name.ToLower().StartsWith(ccarteString) || x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
+//                _carte = _listaCarti.Where(x => x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
 
                 if (_carte != null)
                 {

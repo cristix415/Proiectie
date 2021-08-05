@@ -42,11 +42,17 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageBiblia = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanelIstoric = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnRef = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBoxCautare = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelBiblia = new System.Windows.Forms.FlowLayoutPanel();
-            this.dgvBiblia = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanelIstoric = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCautareBiblia = new System.Windows.Forms.TextBox();
+            this.btnRef = new System.Windows.Forms.Button();
+            this.dgvBiblia = new System.Windows.Forms.DataGridView();
             this.tabPageCANTARI = new System.Windows.Forms.TabPage();
             this.checkBoxBetel = new System.Windows.Forms.CheckBox();
             this.dgwlista = new System.Windows.Forms.DataGridView();
@@ -61,23 +67,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.checkBoxLive = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPageBiblia.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).BeginInit();
             this.tabPageCANTARI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxClock
@@ -193,26 +193,34 @@
             this.tabPageBiblia.Text = "BIBLIA";
             this.tabPageBiblia.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanelIstoric
+            // groupBox5
             // 
-            this.flowLayoutPanelIstoric.AutoScroll = true;
-            this.flowLayoutPanelIstoric.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelIstoric.Location = new System.Drawing.Point(6, 29);
-            this.flowLayoutPanelIstoric.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanelIstoric.Name = "flowLayoutPanelIstoric";
-            this.flowLayoutPanelIstoric.Size = new System.Drawing.Size(209, 154);
-            this.flowLayoutPanelIstoric.TabIndex = 5;
-            this.flowLayoutPanelIstoric.WrapContents = false;
+            this.groupBox5.Controls.Add(this.textBoxCautare);
+            this.groupBox5.Location = new System.Drawing.Point(701, 19);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(230, 86);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Cautare";
             // 
-            // btnRef
+            // textBoxCautare
             // 
-            this.btnRef.BackColor = System.Drawing.Color.White;
-            this.btnRef.Location = new System.Drawing.Point(19, 59);
-            this.btnRef.Name = "btnRef";
-            this.btnRef.Size = new System.Drawing.Size(196, 27);
-            this.btnRef.TabIndex = 4;
-            this.btnRef.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRef.UseVisualStyleBackColor = false;
+            this.textBoxCautare.Location = new System.Drawing.Point(19, 33);
+            this.textBoxCautare.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCautare.Name = "textBoxCautare";
+            this.textBoxCautare.Size = new System.Drawing.Size(196, 26);
+            this.textBoxCautare.TabIndex = 0;
+            this.textBoxCautare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxCautare_KeyUp);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.flowLayoutPanelBiblia);
+            this.groupBox4.Location = new System.Drawing.Point(12, 142);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(230, 381);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Carti";
             // 
             // flowLayoutPanelBiblia
             // 
@@ -224,6 +232,68 @@
             this.flowLayoutPanelBiblia.Size = new System.Drawing.Size(200, 343);
             this.flowLayoutPanelBiblia.TabIndex = 3;
             this.flowLayoutPanelBiblia.WrapContents = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.flowLayoutPanelIstoric);
+            this.groupBox3.Location = new System.Drawing.Point(12, 530);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(230, 186);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Istoric";
+            // 
+            // flowLayoutPanelIstoric
+            // 
+            this.flowLayoutPanelIstoric.AutoScroll = true;
+            this.flowLayoutPanelIstoric.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelIstoric.Location = new System.Drawing.Point(6, 29);
+            this.flowLayoutPanelIstoric.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanelIstoric.Name = "flowLayoutPanelIstoric";
+            this.flowLayoutPanelIstoric.Size = new System.Drawing.Size(209, 154);
+            this.flowLayoutPanelIstoric.TabIndex = 5;
+            this.flowLayoutPanelIstoric.WrapContents = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(-36, -85);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtCautareBiblia);
+            this.groupBox1.Controls.Add(this.btnRef);
+            this.groupBox1.Location = new System.Drawing.Point(12, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 102);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Referinta";
+            // 
+            // txtCautareBiblia
+            // 
+            this.txtCautareBiblia.Location = new System.Drawing.Point(19, 33);
+            this.txtCautareBiblia.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCautareBiblia.Name = "txtCautareBiblia";
+            this.txtCautareBiblia.Size = new System.Drawing.Size(196, 26);
+            this.txtCautareBiblia.TabIndex = 0;
+            
+            this.txtCautareBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyDown);
+            this.txtCautareBiblia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyUp);
+            // 
+            // btnRef
+            // 
+            this.btnRef.BackColor = System.Drawing.Color.White;
+            this.btnRef.Location = new System.Drawing.Point(19, 59);
+            this.btnRef.Name = "btnRef";
+            this.btnRef.Size = new System.Drawing.Size(196, 27);
+            this.btnRef.TabIndex = 4;
+            this.btnRef.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRef.UseVisualStyleBackColor = false;
             // 
             // dgvBiblia
             // 
@@ -253,17 +323,6 @@
             this.dgvBiblia.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_CellDoubleClick);
             this.dgvBiblia.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_RowEnter);
             this.dgvBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvBiblia_KeyDown);
-            // 
-            // txtCautareBiblia
-            // 
-            this.txtCautareBiblia.Location = new System.Drawing.Point(19, 33);
-            this.txtCautareBiblia.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCautareBiblia.Name = "txtCautareBiblia";
-            this.txtCautareBiblia.Size = new System.Drawing.Size(196, 26);
-            this.txtCautareBiblia.TabIndex = 0;
-            this.txtCautareBiblia.TextChanged += new System.EventHandler(this.txtCautareBiblia_TextChanged);
-            this.txtCautareBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyDown);
-            this.txtCautareBiblia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyUp);
             // 
             // tabPageCANTARI
             // 
@@ -393,7 +452,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(965, 693);
+            this.tabPage3.Size = new System.Drawing.Size(965, 721);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Cantari INTERNET";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -451,64 +510,6 @@
             this.checkBoxLive.UseVisualStyleBackColor = true;
             this.checkBoxLive.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtCautareBiblia);
-            this.groupBox1.Controls.Add(this.btnRef);
-            this.groupBox1.Location = new System.Drawing.Point(12, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 102);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Referinta";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(-36, -85);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.flowLayoutPanelIstoric);
-            this.groupBox3.Location = new System.Drawing.Point(12, 530);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(230, 186);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Istoric";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.flowLayoutPanelBiblia);
-            this.groupBox4.Location = new System.Drawing.Point(12, 142);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(230, 381);
-            this.groupBox4.TabIndex = 7;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Carti";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.textBox2);
-            this.groupBox5.Location = new System.Drawing.Point(701, 19);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(230, 86);
-            this.groupBox5.TabIndex = 7;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Cautare";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(19, 33);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(196, 26);
-            this.textBox2.TabIndex = 0;
-            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,6 +533,12 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPrincipal_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPageBiblia.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).EndInit();
             this.tabPageCANTARI.ResumeLayout(false);
             this.tabPageCANTARI.PerformLayout();
@@ -539,12 +546,6 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,7 +586,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxCautare;
         private System.Windows.Forms.GroupBox groupBox4;
     }
 }

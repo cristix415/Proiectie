@@ -501,8 +501,9 @@ namespace ProiectareCantari
                 formSecondMonitor.Hide();
                 foreach (Label ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
+                checkBoxLive.Checked = false;
             }
-            checkBoxLive.Checked = false;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -518,7 +519,7 @@ namespace ProiectareCantari
 
         private void FrmPrincipal_KeyDown(object sender, KeyEventArgs e)
         {
-       //     Oprire(e);
+            Oprire(e);
         }
 
         private void button1_KeyDown(object sender, KeyEventArgs e)
@@ -784,11 +785,6 @@ namespace ProiectareCantari
 
             }
         }
-        private void txtCautareBiblia_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvBiblia_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             AfisareBiblie();
@@ -796,11 +792,12 @@ namespace ProiectareCantari
         }
         private void AfisareBiblie()
         {
-
+            
             if (dgvBiblia.SelectedRows.Count > 0 && checkBoxLive.Checked)
             {
                 Verses verset = (dgvBiblia.SelectedRows[0].DataBoundItem) as Verses;
-
+                if (_carte is null)
+                    _carte = _listaCarti.Where(carte => carte.book_number == verset.book_number).SingleOrDefault();
                 if (_formBiblie == null)
                 {
                     _formBiblie = new FrmBiblie(_screen);
@@ -927,6 +924,54 @@ namespace ProiectareCantari
                 MessageBox.Show("Eroare - VERIFICA CUM AI SCRIS");
             }
         }
+
+        private void textBoxCautare_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CautareFraza();
+            }
+        }
+        private void CautareFraza() {
+
+            
+            string cuvant = textBoxCautare.Text;
+            string stringSql = "SELECT * FROM verses WHERE text like '%" + cuvant + "%'";
+
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SQLiteCommand(stringSql, connection);
+
+                using (SQLiteDataReader sqlReader = command.ExecuteReader())
+                {
+                    while (sqlReader.Read())
+                    {
+                        int book_number = Convert.ToInt32(sqlReader["book_number"]);
+                        int chapter = Convert.ToInt32(sqlReader["chapter"]);
+                        int verse = Convert.ToInt32(sqlReader["verse"]);
+                        string text = (string)sqlReader["text"];
+
+                        text = Regex.Replace(text, "<.*?>", string.Empty);
+                        text = Regex.Replace(text, "[.*]>", string.Empty);
+
+                        text = Regex.Replace(text, @"[\u24D0-\u24E9]+", string.Empty);
+
+                        Verses versett = new Verses(book_number, chapter, verse, text);
+
+                        _listaVersete.Add(versett);
+                    }
+                }
+                BindingSource binding = new BindingSource();
+                binding.DataSource = _listaVersete;
+                dgvBiblia.DataSource = binding;
+                dgvBiblia.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgvBiblia.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            }
     }
     public class MyButton : Button
     {

@@ -934,7 +934,7 @@ namespace ProiectareCantari
         }
         private void CautareFraza() {
 
-            
+            _listaVersete.Clear();
             string cuvant = textBoxCautare.Text;
             string stringSql = "SELECT * FROM verses WHERE text like '%" + cuvant + "%'";
 

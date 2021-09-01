@@ -178,49 +178,91 @@ namespace ProiectareCantari
             labelTitlu.Text = cantare.Titlu;
             labelTitlu.AutoSize = false;
 
-            labelTitlu.Width = _screen.WorkingArea.Size.Width / 6;
+            labelTitlu.Width = 500;
 
-            foreach (var strofa in cantare.ListaStrofe)
+            for (int i=0; i< cantare.ListaStrofe.Count; i++)
             {
-                Label lblStrofa = CreareLabel(strofa);
+                int numLines = cantare.ListaStrofe[i].Split('\n').Length - 1;
+                Button lblNrStrofa = CreareNrButton((i+1).ToString(), numLines, false);
+                flowStrofe.Controls.Add(lblNrStrofa);
+                Button lblStrofa = CreareLabel(cantare.ListaStrofe[i]);
                 flowStrofe.Controls.Add(lblStrofa);
-
+                flowStrofe.BackColor = Color.Black;
                 if (cantare.listaCor.Count > 0)
                 {
-                    Label lblCor = CreareLabel(cantare.listaCor[0]);
+                    int numLinesCor = cantare.listaCor[0].Split('\n').Length - 1;
+                    Button lblNrcor = CreareNrButton("", numLinesCor, true);
+                    flowStrofe.Controls.Add(lblNrcor);
+                    Button lblCor = CreareLabel(cantare.listaCor[0]);
                     flowStrofe.Controls.Add(lblCor);
                 }
 
             }
             if (!String.IsNullOrEmpty(cantare.Ending))
             {
-                Label lblEnd = CreareLabel(cantare.Ending);
+                Button lblEnd = CreareLabel(cantare.Ending);
                 flowStrofe.Controls.Add(lblEnd);
             }
         }
 
-        private Label CreareLabel(string text)
+        private Button CreareLabel(string text)
         {
-            Label lblStrofa = new Label();
-            lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
-            lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-            lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
+            Button lblStrofa = new Button();
+            //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
+            //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
+            lblStrofa.Width = 520;
+            //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
+            int numLines = text.Split('\n').Length-1;
+            lblStrofa.Height = 30*numLines;
             lblStrofa.Text = text;
             lblStrofa.AutoSize = false;
-            lblStrofa.TextAlign = ContentAlignment.MiddleCenter;
+            lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
 
-            lblStrofa.Margin = new Padding(10);
+            lblStrofa.Margin = new Padding(0);
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
 
             //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
-            lblStrofa.Click += new EventHandler(FireClickEvent);            
+            lblStrofa.Click += new EventHandler(FireClickEvent);
+            lblStrofa.KeyPress += new KeyPressEventHandler(FireStrofaKEYEvent);
             lblStrofa.DoubleClick += (s, e) =>
             {
                 checkBoxLive.Checked = true;
 
             };
 
+            return lblStrofa;
+        }
+        private Button CreareNrButton(string text, int nrLines, bool cor)
+        {
+            Button lblStrofa = new Button();
+            //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
+            //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
+            lblStrofa.Width = 40;
+            //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
+           // int numLines = text.Split('\n').Length - 1;
+            lblStrofa.Height = 30 * nrLines;            
+            lblStrofa.AutoSize = false;
+            lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
+            lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
+            lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
+            lblStrofa.Margin = new Padding(0);
+            if (cor)
+            {                
+                lblStrofa.Text = "C   O   R";
+            }
+            else
+            {
+                lblStrofa.Text = text;
+                
+            }
+
+
+
+            //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
+
+            lblStrofa.Enabled = false;
+            lblStrofa.ForeColor = lblStrofa.Enabled == false ? Color.Blue : Properties.Settings.Default.CuloareText;
             return lblStrofa;
         }
 
@@ -283,7 +325,7 @@ namespace ProiectareCantari
 
                 foreach (Control ctl in flowStrofe.Controls)
                 {
-                    (ctl as Label).ForeColor = Properties.Settings.Default.CuloareText;
+                    (ctl as Button).ForeColor = Properties.Settings.Default.CuloareText;
                 }
 
 
@@ -468,7 +510,33 @@ namespace ProiectareCantari
         {
             if (checkBoxLive.Checked)
             {
-                foreach (Label ctl in flowStrofe.Controls)
+                foreach (Button ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
+
+                Button lblStrofa = sender as Button;
+                lblStrofa.ForeColor = Color.Red;
+                //lblStrofa.BorderStyle = BorderStyle.FixedSingle;
+                lblStrofa.Name = "focus";
+
+                if (_screen != null)
+                {
+
+                    formSecondMonitor.BindStrofa(lblStrofa.Text);
+                    formSecondMonitor.BringToFront();
+                    // deschide formularul de cantare pe monitorul 2 fullscreen
+                    ProiecteazaCantare(_screen.WorkingArea);
+
+                }
+                else
+                    MessageBox.Show($"Monitor does not exists.");
+                this.Focus();
+            }
+        }
+        private void FireStrofaKEYEvent(object sender, EventArgs e)
+        {
+            if (checkBoxLive.Checked)
+            {
+                foreach (Button ctl in flowStrofe.Controls)
                     ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
                 Label lblStrofa = sender as Label;
@@ -499,7 +567,7 @@ namespace ProiectareCantari
             if (e.KeyCode == Keys.Escape)
             {
                 formSecondMonitor.Hide();
-                foreach (Label ctl in flowStrofe.Controls)
+                foreach (Button ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
                 checkBoxLive.Checked = false;
             }
@@ -849,7 +917,7 @@ namespace ProiectareCantari
                 if (_formBiblie != null)
                     _formBiblie.Hide();
 
-                foreach (Label ctl in flowStrofe.Controls)
+                foreach (Button ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
             }
             dgvBiblia.Focus();
@@ -972,6 +1040,8 @@ namespace ProiectareCantari
             }
 
             }
+
+
     }
     public class MyButton : Button
     {

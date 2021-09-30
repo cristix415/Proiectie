@@ -187,19 +187,28 @@ namespace ProiectareCantari
             for (int i = 0; i < cantare.ListaStrofe.Count; i++)
             {
                 int numLines = cantare.ListaStrofe[i].Split('\n').Length - 1;
-                Label lblNrStrofa = CreareNrButton((i + 1).ToString(), numLines, false);
+                Label btnNrStrofa = CreareNrButton((i + 1).ToString(), numLines, false);
 
-                flowStrofe.Controls.Add(lblNrStrofa);
-                Button lblStrofa = CreareLabel(cantare.ListaStrofe[i]);
-                flowStrofe.Controls.Add(lblStrofa);
+                flowStrofe.Controls.Add(btnNrStrofa);
+                Button btnStrofa = CreareLabel(cantare.ListaStrofe[i]);
+                flowStrofe.Controls.Add(btnStrofa);
+
+                
+
+                btnNrStrofa.Height = btnStrofa.Height;
+
+                
 
                 if (cantare.listaCor.Count > 0)
                 {
                     int numLinesCor = cantare.listaCor[0].Split('\n').Length - 1;
-                    Label lblNrcor = CreareNrButton("", numLinesCor, true);
-                    flowStrofe.Controls.Add(lblNrcor);
-                    Button lblCor = CreareLabel(cantare.listaCor[0]);
-                    flowStrofe.Controls.Add(lblCor);
+                    Label btnNrcor = CreareNrButton("", numLinesCor, true);
+                    flowStrofe.Controls.Add(btnNrcor);
+                    Button btnCor = CreareLabel(cantare.listaCor[0]);
+                    
+                    flowStrofe.Controls.Add(btnCor);
+                    btnNrcor.Height = btnCor.Height;
+
                 }
 
 
@@ -216,14 +225,14 @@ namespace ProiectareCantari
             Button lblStrofa = new Button();
             //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
             //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-            lblStrofa.Width = 520;
+         //   lblStrofa.Width = 520;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
             int numLines = text.Split('\n').Length - 1;
-            lblStrofa.Height = 35 * numLines;
-            lblStrofa.Text = text;
-            lblStrofa.AutoSize = false;
+          //  lblStrofa.Height = 35 * numLines;
+            lblStrofa.Text = text;            
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
-
+            lblStrofa.AutoSize = true;
+            lblStrofa.MinimumSize = new Size(520, 30);
 
             lblStrofa.Margin = new Padding(0);
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
@@ -248,16 +257,16 @@ namespace ProiectareCantari
             lblStrofa.Width = 40;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
             // int numLines = text.Split('\n').Length - 1;
-            lblStrofa.Height = 35 * nrLines;
-            lblStrofa.AutoSize = false;
+       //     lblStrofa.Height = 35 * nrLines;
+       //     lblStrofa.AutoSize = false;
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
 
-            lblStrofa.Margin = new Padding(0);
+            //lblStrofa.Margin = new Padding(0);
             if (cor)
             {
-                lblStrofa.Text = "C   O   R";
+                lblStrofa.Text = "C  O  R";
             }
             else
             {

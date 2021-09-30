@@ -26,5 +26,11 @@
     <Setting Name="Aliniere" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="CuloareFundalCeas" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">64, 0, 64</Value>
+    </Setting>
+    <Setting Name="CuloareTextCeas" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

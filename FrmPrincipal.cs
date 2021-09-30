@@ -38,6 +38,7 @@ namespace ProiectareCantari
             txtLungimeCadru.Text = Properties.Settings.Default.LungimeCadruCeas.ToString();
             txtLatimeCadru.Text = Properties.Settings.Default.LatimeCadruCeas.ToString();
             textBoxMarime.Text = Properties.Settings.Default.MarimeCeas.ToString();
+            this.WindowState = FormWindowState.Maximized;
             try
             {
                 tabControl1.TabPages.Remove(tabPage3);
@@ -183,22 +184,24 @@ namespace ProiectareCantari
 
             labelTitlu.Width = 500;
 
-            for (int i=0; i< cantare.ListaStrofe.Count; i++)
+            for (int i = 0; i < cantare.ListaStrofe.Count; i++)
             {
                 int numLines = cantare.ListaStrofe[i].Split('\n').Length - 1;
-                Button lblNrStrofa = CreareNrButton((i+1).ToString(), numLines, false);
+                Label lblNrStrofa = CreareNrButton((i + 1).ToString(), numLines, false);
+
                 flowStrofe.Controls.Add(lblNrStrofa);
                 Button lblStrofa = CreareLabel(cantare.ListaStrofe[i]);
                 flowStrofe.Controls.Add(lblStrofa);
-                flowStrofe.BackColor = Color.Black;
+
                 if (cantare.listaCor.Count > 0)
                 {
                     int numLinesCor = cantare.listaCor[0].Split('\n').Length - 1;
-                    Button lblNrcor = CreareNrButton("", numLinesCor, true);
+                    Label lblNrcor = CreareNrButton("", numLinesCor, true);
                     flowStrofe.Controls.Add(lblNrcor);
                     Button lblCor = CreareLabel(cantare.listaCor[0]);
                     flowStrofe.Controls.Add(lblCor);
                 }
+
 
             }
             if (!String.IsNullOrEmpty(cantare.Ending))
@@ -215,11 +218,12 @@ namespace ProiectareCantari
             //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
             lblStrofa.Width = 520;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
-            int numLines = text.Split('\n').Length-1;
-            lblStrofa.Height = 30*numLines;
+            int numLines = text.Split('\n').Length - 1;
+            lblStrofa.Height = 35 * numLines;
             lblStrofa.Text = text;
             lblStrofa.AutoSize = false;
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
+
 
             lblStrofa.Margin = new Padding(0);
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
@@ -236,36 +240,38 @@ namespace ProiectareCantari
 
             return lblStrofa;
         }
-        private Button CreareNrButton(string text, int nrLines, bool cor)
+        private Label CreareNrButton(string text, int nrLines, bool cor)
         {
-            Button lblStrofa = new Button();
+            Label lblStrofa = new Label();
             //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
             //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
             lblStrofa.Width = 40;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
-           // int numLines = text.Split('\n').Length - 1;
-            lblStrofa.Height = 30 * nrLines;            
+            // int numLines = text.Split('\n').Length - 1;
+            lblStrofa.Height = 35 * nrLines;
             lblStrofa.AutoSize = false;
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
+
             lblStrofa.Margin = new Padding(0);
             if (cor)
-            {                
+            {
                 lblStrofa.Text = "C   O   R";
             }
             else
             {
                 lblStrofa.Text = text;
-                
+
             }
 
 
+            lblStrofa.TabStop = false;
 
             //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
 
-            lblStrofa.Enabled = false;
-            lblStrofa.ForeColor = lblStrofa.Enabled == false ? Color.Blue : Properties.Settings.Default.CuloareText;
+            //  lblStrofa.Enabled = false;
+            //lblStrofa.ForeColor = lblStrofa.Enabled == false ? Color.Blue : Properties.Settings.Default.CuloareText;
             return lblStrofa;
         }
 
@@ -305,7 +311,10 @@ namespace ProiectareCantari
                 Properties.Settings.Default.Reload();
                 foreach (Control ctl in flowStrofe.Controls)
                 {
-                    (ctl as Label).BackColor = Properties.Settings.Default.CuloareFundal;
+                    if (ctl is Button)
+                        (ctl as Button).BackColor = Properties.Settings.Default.CuloareFundal;
+                    else
+                        (ctl as Label).BackColor = Properties.Settings.Default.CuloareFundal;
                 }
 
             }
@@ -328,7 +337,10 @@ namespace ProiectareCantari
 
                 foreach (Control ctl in flowStrofe.Controls)
                 {
-                    (ctl as Button).ForeColor = Properties.Settings.Default.CuloareText;
+                    if (ctl is Button)
+                        (ctl as Button).ForeColor = Properties.Settings.Default.CuloareText;
+                    else
+                        (ctl as Label).ForeColor = Properties.Settings.Default.CuloareText;
                 }
 
 
@@ -515,7 +527,7 @@ namespace ProiectareCantari
         {
             if (checkBoxLive.Checked)
             {
-                foreach (Button ctl in flowStrofe.Controls)
+                foreach (Control ctl in flowStrofe.Controls)
                     ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
                 Button lblStrofa = sender as Button;
@@ -544,15 +556,15 @@ namespace ProiectareCantari
                 foreach (Button ctl in flowStrofe.Controls)
                     ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
-                Label lblStrofa = sender as Label;
-                lblStrofa.ForeColor = Color.Red;
-                lblStrofa.BorderStyle = BorderStyle.FixedSingle;
-                lblStrofa.Name = "focus";
+                Button btnStrofa = sender as Button;
+                btnStrofa.ForeColor = Color.Red;
+                //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
+                btnStrofa.Name = "focus";
 
                 if (_screen != null)
                 {
 
-                    formSecondMonitor.BindStrofa(lblStrofa.Text);
+                    formSecondMonitor.BindStrofa(btnStrofa.Text);
                     formSecondMonitor.BringToFront();
                     // deschide formularul de cantare pe monitorul 2 fullscreen
                     ProiecteazaCantare(_screen.WorkingArea);
@@ -572,11 +584,11 @@ namespace ProiectareCantari
             if (e.KeyCode == Keys.Escape)
             {
                 formSecondMonitor.Hide();
-                foreach (Button ctl in flowStrofe.Controls)
-                    ctl.ForeColor = Color.White;
+                foreach (Control ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
                 checkBoxLive.Checked = false;
             }
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -861,7 +873,7 @@ namespace ProiectareCantari
         }
         private void AfisareBiblie()
         {
-            
+
             if (dgvBiblia.SelectedRows.Count > 0 && checkBoxLive.Checked)
             {
                 Verses verset = (dgvBiblia.SelectedRows[0].DataBoundItem) as Verses;
@@ -918,8 +930,8 @@ namespace ProiectareCantari
                 if (_formBiblie != null)
                     _formBiblie.Hide();
 
-                foreach (Button ctl in flowStrofe.Controls)
-                    ctl.ForeColor = Color.White;
+                foreach (Control ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
             }
             dgvBiblia.Focus();
         }
@@ -941,7 +953,7 @@ namespace ProiectareCantari
 
 
                 _carte = _listaCarti.Where(x => x.long_name.ToLower().StartsWith(ccarteString) || x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
-//                _carte = _listaCarti.Where(x => x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
+                //                _carte = _listaCarti.Where(x => x.Short_name.ToLower().StartsWith(ccarteString)).FirstOrDefault();
 
                 if (_carte != null)
                 {
@@ -1001,7 +1013,8 @@ namespace ProiectareCantari
                 CautareFraza();
             }
         }
-        private void CautareFraza() {
+        private void CautareFraza()
+        {
 
             _listaVersete.Clear();
             string cuvant = textBoxCautare.Text;
@@ -1040,8 +1053,9 @@ namespace ProiectareCantari
                 dgvBiblia.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
-            }
+        }
 
+        #region CEAS
         private void txtLungimeCadru_Leave(object sender, EventArgs e)
         {
             AliniazaCeas();
@@ -1056,7 +1070,7 @@ namespace ProiectareCantari
         private void radioButtonCentruCeas_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonCentruCeas.Checked == true)
-            { 
+            {
                 aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width / 2 - Properties.Settings.Default.LungimeCadruCeas / 2, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
                 if (formCeas != null)
                     formCeas.Location = aliniere;
@@ -1069,7 +1083,7 @@ namespace ProiectareCantari
             {
                 aliniere = new Point(_screen.WorkingArea.Left, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
                 if (formCeas != null)
-                formCeas.Location = aliniere;
+                    formCeas.Location = aliniere;
             }
         }
 
@@ -1084,18 +1098,13 @@ namespace ProiectareCantari
 
         }
 
-        private void textBoxMarime_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBoxMarime_Leave(object sender, EventArgs e)
         {
             Properties.Settings.Default["MarimeCeas"] = Convert.ToInt32(textBoxMarime.Text);
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
-            if (formCeas != null)
-            formCeas.ModificaFont();
+            if (formCeas != null)            
+                formCeas.ModificaFont();                            
         }
 
         private void txtLungimeCadru_KeyDown(object sender, KeyEventArgs e)
@@ -1110,7 +1119,8 @@ namespace ProiectareCantari
                 { };
             }
         }
-        private void AliniazaCeas() {
+        private void AliniazaCeas()
+        {
             Properties.Settings.Default["LatimeCadruCeas"] = Convert.ToInt32(txtLatimeCadru.Text);
             Properties.Settings.Default["LungimeCadruCeas"] = Convert.ToInt32(txtLungimeCadru.Text);
             Properties.Settings.Default.Save();
@@ -1133,29 +1143,8 @@ namespace ProiectareCantari
 
             formCeas.Width = Properties.Settings.Default.LungimeCadruCeas;
             formCeas.Height = Properties.Settings.Default.LatimeCadruCeas;
-        }
-        private void AliniazaLungime() {
-            Properties.Settings.Default["LungimeCadruCeas"] = Convert.ToInt32(txtLungimeCadru.Text);
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Reload();
-            if (radioButtonCentruCeas.Checked == true)
-            {
-                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width / 2 - Properties.Settings.Default.LungimeCadruCeas / 2, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
-                formCeas.Location = aliniere;
-            }
-            if (radioButtonStangaCeas.Checked == true)
-            {
-                aliniere = new Point(_screen.WorkingArea.Left, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
-                formCeas.Location = aliniere;
-            }
-            if (radioButtonDreaptaCeas.Checked == true)
-            {
-                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width - Properties.Settings.Default.LungimeCadruCeas, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
-                formCeas.Location = aliniere;
-            }
 
-            formCeas.Width = Properties.Settings.Default.LungimeCadruCeas;
-            formCeas.Height = Properties.Settings.Default.LatimeCadruCeas;
+
         }
 
         private void txtLatimeCadru_KeyDown(object sender, KeyEventArgs e)
@@ -1170,11 +1159,68 @@ namespace ProiectareCantari
                 { };
             }
         }
+
+        private void txtLungimeCadru_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    AliniazaCeas();
+                }
+                catch
+                { };
+            }
+        }
+
+
+        private void btnCuloareFundalCeas_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog();
+            colorDlg.AllowFullOpen = false;
+            colorDlg.AnyColor = true;
+            colorDlg.SolidColorOnly = false;
+            colorDlg.Color = Color.Red;
+
+
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default["CuloareFundalCeas"] = colorDlg.Color;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Reload();
+                if (formCeas != null)
+                {
+                    formCeas.ModificaFont();
+                    formCeas.BackColor = Properties.Settings.Default.CuloareFundalCeas;
+                }
+
+            }
+        }
+
+        private void btnCuloareTextCeas_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog();
+            colorDlg.AllowFullOpen = false;
+            colorDlg.AnyColor = true;
+            colorDlg.SolidColorOnly = false;
+            colorDlg.Color = Color.Red;
+
+
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default["CuloareTextCeas"] = colorDlg.Color;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Reload();
+                if (formCeas != null)
+                    formCeas.ModificaFont();
+            }
+        }
+        #endregion
     }
-    public class MyButton : Button
-    {
-        public int verset { get; set; }
-        public int capitol { get; set; }
-        public Book carte { get; set; }
+        public class MyButton : Button
+        {
+            public int verset { get; set; }
+            public int capitol { get; set; }
+            public Book carte { get; set; }
+        }
     }
-}

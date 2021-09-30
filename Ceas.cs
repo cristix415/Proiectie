@@ -47,6 +47,8 @@ namespace ProiectareCantari
         }
         public void ModificaFont() {
             lblTime.Font = new Font("Arial", Properties.Settings.Default.MarimeCeas, FontStyle.Bold);
+            lblTime.BackColor = Properties.Settings.Default.CuloareFundalCeas;
+            lblTime.ForeColor = Properties.Settings.Default.CuloareTextCeas;
         }
         System.Windows.Forms.Timer t = null;
         private void StartTimer()

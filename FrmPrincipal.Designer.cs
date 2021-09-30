@@ -65,6 +65,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPageCeas = new System.Windows.Forms.TabPage();
+            this.btnCuloareTextCeas = new System.Windows.Forms.Button();
+            this.btnCuloareFundalCeas = new System.Windows.Forms.Button();
             this.radioButtonStangaCeas = new System.Windows.Forms.RadioButton();
             this.radioButtonDreaptaCeas = new System.Windows.Forms.RadioButton();
             this.radioButtonCentruCeas = new System.Windows.Forms.RadioButton();
@@ -273,10 +275,11 @@
             // 
             // txtCautareBiblia
             // 
+            this.txtCautareBiblia.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCautareBiblia.Location = new System.Drawing.Point(25, 41);
             this.txtCautareBiblia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCautareBiblia.Name = "txtCautareBiblia";
-            this.txtCautareBiblia.Size = new System.Drawing.Size(260, 30);
+            this.txtCautareBiblia.Size = new System.Drawing.Size(260, 34);
             this.txtCautareBiblia.TabIndex = 0;
             this.txtCautareBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyDown);
             this.txtCautareBiblia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCautareBiblia_KeyUp);
@@ -493,6 +496,8 @@
             // 
             // tabPageCeas
             // 
+            this.tabPageCeas.Controls.Add(this.btnCuloareTextCeas);
+            this.tabPageCeas.Controls.Add(this.btnCuloareFundalCeas);
             this.tabPageCeas.Controls.Add(this.radioButtonStangaCeas);
             this.tabPageCeas.Controls.Add(this.radioButtonDreaptaCeas);
             this.tabPageCeas.Controls.Add(this.radioButtonCentruCeas);
@@ -508,6 +513,30 @@
             this.tabPageCeas.TabIndex = 3;
             this.tabPageCeas.Text = "Setari Ceas";
             this.tabPageCeas.UseVisualStyleBackColor = true;
+            // 
+            // btnCuloareTextCeas
+            // 
+            this.btnCuloareTextCeas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCuloareTextCeas.Location = new System.Drawing.Point(117, 349);
+            this.btnCuloareTextCeas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCuloareTextCeas.Name = "btnCuloareTextCeas";
+            this.btnCuloareTextCeas.Size = new System.Drawing.Size(179, 43);
+            this.btnCuloareTextCeas.TabIndex = 31;
+            this.btnCuloareTextCeas.Text = "Culoare Text";
+            this.btnCuloareTextCeas.UseVisualStyleBackColor = true;
+            this.btnCuloareTextCeas.Click += new System.EventHandler(this.btnCuloareTextCeas_Click);
+            // 
+            // btnCuloareFundalCeas
+            // 
+            this.btnCuloareFundalCeas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCuloareFundalCeas.Location = new System.Drawing.Point(117, 300);
+            this.btnCuloareFundalCeas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCuloareFundalCeas.Name = "btnCuloareFundalCeas";
+            this.btnCuloareFundalCeas.Size = new System.Drawing.Size(179, 43);
+            this.btnCuloareFundalCeas.TabIndex = 30;
+            this.btnCuloareFundalCeas.Text = "Culoare Fundal";
+            this.btnCuloareFundalCeas.UseVisualStyleBackColor = true;
+            this.btnCuloareFundalCeas.Click += new System.EventHandler(this.btnCuloareFundalCeas_Click);
             // 
             // radioButtonStangaCeas
             // 
@@ -578,6 +607,7 @@
             this.txtLungimeCadru.Size = new System.Drawing.Size(53, 34);
             this.txtLungimeCadru.TabIndex = 24;
             this.txtLungimeCadru.Text = "200";
+            this.txtLungimeCadru.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLungimeCadru_KeyDown_1);
             this.txtLungimeCadru.Leave += new System.EventHandler(this.txtLungimeCadru_Leave);
             // 
             // label3
@@ -711,5 +741,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxMarime;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCuloareTextCeas;
+        private System.Windows.Forms.Button btnCuloareFundalCeas;
     }
 }

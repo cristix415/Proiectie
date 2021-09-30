@@ -18,6 +18,7 @@ namespace ProiectareCantari
         }
         public void BindStrofa(String strofa)
         {
+            this.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
             lblStrofa.Text = strofa;            

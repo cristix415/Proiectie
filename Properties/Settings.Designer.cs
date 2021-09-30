@@ -118,5 +118,28 @@ namespace ProiectareCantari.Properties {
                 this["Aliniere"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64, 0, 64")]
+        public global::System.Drawing.Color CuloareFundalCeas {
+            get {
+                return ((global::System.Drawing.Color)(this["CuloareFundalCeas"]));
+            }
+            set {
+                this["CuloareFundalCeas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color CuloareTextCeas {
+            get {
+                return ((global::System.Drawing.Color)(this["CuloareTextCeas"]));
+            }
+            set {
+                this["CuloareTextCeas"] = value;
+            }
+        }
     }
 }

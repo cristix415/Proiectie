@@ -193,11 +193,11 @@ namespace ProiectareCantari
                 Button btnStrofa = CreareLabel(cantare.ListaStrofe[i]);
                 flowStrofe.Controls.Add(btnStrofa);
 
-                
+
 
                 btnNrStrofa.Height = btnStrofa.Height;
 
-                
+
 
                 if (cantare.listaCor.Count > 0)
                 {
@@ -205,7 +205,7 @@ namespace ProiectareCantari
                     Label btnNrcor = CreareNrButton("", numLinesCor, true);
                     flowStrofe.Controls.Add(btnNrcor);
                     Button btnCor = CreareLabel(cantare.listaCor[0]);
-                    
+
                     flowStrofe.Controls.Add(btnCor);
                     btnNrcor.Height = btnCor.Height;
 
@@ -222,14 +222,17 @@ namespace ProiectareCantari
 
         private Button CreareLabel(string text)
         {
-            Button lblStrofa = new Button();
+            DoubleClickButton lblStrofa = new DoubleClickButton();
+            lblStrofa.DoubleClick += new EventHandler(FireDbClickClickEvent);
+            
+        //    DoubleClickButton lblStrofa = new Button();
             //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
             //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-         //   lblStrofa.Width = 520;
+            //   lblStrofa.Width = 520;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
             int numLines = text.Split('\n').Length - 1;
-          //  lblStrofa.Height = 35 * numLines;
-            lblStrofa.Text = text;            
+            //  lblStrofa.Height = 35 * numLines;
+            lblStrofa.Text = text;
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
             lblStrofa.AutoSize = true;
             lblStrofa.MinimumSize = new Size(520, 30);
@@ -241,11 +244,8 @@ namespace ProiectareCantari
             //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
             lblStrofa.Click += new EventHandler(FireClickEvent);
             lblStrofa.KeyPress += new KeyPressEventHandler(FireStrofaKEYEvent);
-            lblStrofa.DoubleClick += (s, e) =>
-            {
-                checkBoxLive.Checked = true;
+            //lblStrofa.DoubleClick += new EventHandler(FireDbClickClickEvent);
 
-            };
 
             return lblStrofa;
         }
@@ -257,8 +257,8 @@ namespace ProiectareCantari
             lblStrofa.Width = 40;
             //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
             // int numLines = text.Split('\n').Length - 1;
-       //     lblStrofa.Height = 35 * nrLines;
-       //     lblStrofa.AutoSize = false;
+            //     lblStrofa.Height = 35 * nrLines;
+            //     lblStrofa.AutoSize = false;
             lblStrofa.TextAlign = ContentAlignment.MiddleLeft;
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
@@ -582,6 +582,31 @@ namespace ProiectareCantari
                 else
                     MessageBox.Show($"Monitor does not exists.");
             }
+        }
+        private void FireDbClickClickEvent(object sender, EventArgs e)
+        {
+            checkBoxLive.Checked = true;
+                foreach (Control ctl in flowStrofe.Controls)
+                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
+
+                Button btnStrofa = sender as Button;
+                btnStrofa.ForeColor = Color.Red;
+                //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
+                btnStrofa.Name = "focus";
+
+                if (_screen != null)
+                {
+
+                    formSecondMonitor.BindStrofa(btnStrofa.Text);
+                    formSecondMonitor.BringToFront();
+                    // deschide formularul de cantare pe monitorul 2 fullscreen
+                    ProiecteazaCantare(_screen.WorkingArea);
+
+                }
+                else
+                    MessageBox.Show($"Monitor does not exists.");
+            
+
         }
 
         private void rtxtCantare_KeyDown(object sender, KeyEventArgs e)
@@ -1112,8 +1137,8 @@ namespace ProiectareCantari
             Properties.Settings.Default["MarimeCeas"] = Convert.ToInt32(textBoxMarime.Text);
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
-            if (formCeas != null)            
-                formCeas.ModificaFont();                            
+            if (formCeas != null)
+                formCeas.ModificaFont();
         }
 
         private void txtLungimeCadru_KeyDown(object sender, KeyEventArgs e)
@@ -1226,10 +1251,18 @@ namespace ProiectareCantari
         }
         #endregion
     }
-        public class MyButton : Button
+    public class MyButton : Button
+    {
+        public int verset { get; set; }
+        public int capitol { get; set; }
+        public Book carte { get; set; }
+    }
+    public class DoubleClickButton : Button
+    {
+        public DoubleClickButton()
         {
-            public int verset { get; set; }
-            public int capitol { get; set; }
-            public Book carte { get; set; }
+            SetStyle(ControlStyles.StandardClick |
+ControlStyles.StandardDoubleClick, true);
         }
     }
+}

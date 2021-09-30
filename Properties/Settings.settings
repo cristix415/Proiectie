@@ -12,10 +12,19 @@
       <Value Profile="(Default)">70</Value>
     </Setting>
     <Setting Name="MarimeCeas" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">80</Value>
+      <Value Profile="(Default)">40</Value>
     </Setting>
     <Setting Name="FlagCeas" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LungimeCadruCeas" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="LatimeCadruCeas" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Aliniere" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

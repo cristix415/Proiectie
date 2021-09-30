@@ -35,23 +35,31 @@
             // 
             this.lblTime.BackColor = System.Drawing.Color.Black;
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.ForeColor = System.Drawing.Color.White;
-            this.lblTime.Location = new System.Drawing.Point(0, 0);
+            this.lblTime.Location = new System.Drawing.Point(5, 5);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(800, 450);
+            this.lblTime.Size = new System.Drawing.Size(381, 130);
             this.lblTime.TabIndex = 0;
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTime_MouseDown);
             // 
             // Ceas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(391, 140);
             this.Controls.Add(this.lblTime);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Ceas";
-            this.Text = "Ceas";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

@@ -32,8 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.checkBoxClock = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxMarime = new System.Windows.Forms.TextBox();
             this.textBoxMarimeCantari = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -66,6 +64,16 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.tabPageCeas = new System.Windows.Forms.TabPage();
+            this.radioButtonStangaCeas = new System.Windows.Forms.RadioButton();
+            this.radioButtonDreaptaCeas = new System.Windows.Forms.RadioButton();
+            this.radioButtonCentruCeas = new System.Windows.Forms.RadioButton();
+            this.txtLatimeCadru = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtLungimeCadru = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxMarime = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.checkBoxLive = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageBiblia.SuspendLayout();
@@ -78,13 +86,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPageCeas.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxClock
             // 
             this.checkBoxClock.AutoSize = true;
             this.checkBoxClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxClock.Location = new System.Drawing.Point(1360, 740);
+            this.checkBoxClock.Location = new System.Drawing.Point(1350, 663);
             this.checkBoxClock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxClock.Name = "checkBoxClock";
             this.checkBoxClock.Size = new System.Drawing.Size(166, 33);
@@ -92,27 +101,6 @@
             this.checkBoxClock.Text = "Afisare ceas";
             this.checkBoxClock.UseVisualStyleBackColor = true;
             this.checkBoxClock.CheckedChanged += new System.EventHandler(this.checkBoxClock_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1367, 791);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 29);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Marime:";
-            // 
-            // textBoxMarime
-            // 
-            this.textBoxMarime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxMarime.Location = new System.Drawing.Point(1473, 791);
-            this.textBoxMarime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxMarime.Name = "textBoxMarime";
-            this.textBoxMarime.Size = new System.Drawing.Size(53, 34);
-            this.textBoxMarime.TabIndex = 6;
-            this.textBoxMarime.Text = "48";
-            this.textBoxMarime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxMarime_KeyDown);
             // 
             // textBoxMarimeCantari
             // 
@@ -166,6 +154,7 @@
             this.tabControl1.Controls.Add(this.tabPageBiblia);
             this.tabControl1.Controls.Add(this.tabPageCANTARI);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPageCeas);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -502,6 +491,127 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // tabPageCeas
+            // 
+            this.tabPageCeas.Controls.Add(this.radioButtonStangaCeas);
+            this.tabPageCeas.Controls.Add(this.radioButtonDreaptaCeas);
+            this.tabPageCeas.Controls.Add(this.radioButtonCentruCeas);
+            this.tabPageCeas.Controls.Add(this.txtLatimeCadru);
+            this.tabPageCeas.Controls.Add(this.label4);
+            this.tabPageCeas.Controls.Add(this.txtLungimeCadru);
+            this.tabPageCeas.Controls.Add(this.label3);
+            this.tabPageCeas.Controls.Add(this.textBoxMarime);
+            this.tabPageCeas.Controls.Add(this.label1);
+            this.tabPageCeas.Location = new System.Drawing.Point(4, 34);
+            this.tabPageCeas.Name = "tabPageCeas";
+            this.tabPageCeas.Size = new System.Drawing.Size(1289, 790);
+            this.tabPageCeas.TabIndex = 3;
+            this.tabPageCeas.Text = "Setari Ceas";
+            this.tabPageCeas.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonStangaCeas
+            // 
+            this.radioButtonStangaCeas.AutoSize = true;
+            this.radioButtonStangaCeas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonStangaCeas.Location = new System.Drawing.Point(71, 108);
+            this.radioButtonStangaCeas.Name = "radioButtonStangaCeas";
+            this.radioButtonStangaCeas.Size = new System.Drawing.Size(96, 29);
+            this.radioButtonStangaCeas.TabIndex = 29;
+            this.radioButtonStangaCeas.Text = "Stanga";
+            this.radioButtonStangaCeas.UseVisualStyleBackColor = true;
+            this.radioButtonStangaCeas.CheckedChanged += new System.EventHandler(this.radioButtonStangaCeas_CheckedChanged);
+            // 
+            // radioButtonDreaptaCeas
+            // 
+            this.radioButtonDreaptaCeas.AutoSize = true;
+            this.radioButtonDreaptaCeas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonDreaptaCeas.Location = new System.Drawing.Point(71, 135);
+            this.radioButtonDreaptaCeas.Name = "radioButtonDreaptaCeas";
+            this.radioButtonDreaptaCeas.Size = new System.Drawing.Size(102, 29);
+            this.radioButtonDreaptaCeas.TabIndex = 28;
+            this.radioButtonDreaptaCeas.Text = "Dreapta";
+            this.radioButtonDreaptaCeas.UseVisualStyleBackColor = true;
+            this.radioButtonDreaptaCeas.CheckedChanged += new System.EventHandler(this.radioButtonDreaptaCeas_CheckedChanged);
+            // 
+            // radioButtonCentruCeas
+            // 
+            this.radioButtonCentruCeas.AutoSize = true;
+            this.radioButtonCentruCeas.Checked = true;
+            this.radioButtonCentruCeas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonCentruCeas.Location = new System.Drawing.Point(71, 81);
+            this.radioButtonCentruCeas.Name = "radioButtonCentruCeas";
+            this.radioButtonCentruCeas.Size = new System.Drawing.Size(92, 29);
+            this.radioButtonCentruCeas.TabIndex = 27;
+            this.radioButtonCentruCeas.TabStop = true;
+            this.radioButtonCentruCeas.Text = "Centru";
+            this.radioButtonCentruCeas.UseVisualStyleBackColor = true;
+            this.radioButtonCentruCeas.CheckedChanged += new System.EventHandler(this.radioButtonCentruCeas_CheckedChanged);
+            // 
+            // txtLatimeCadru
+            // 
+            this.txtLatimeCadru.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLatimeCadru.Location = new System.Drawing.Point(382, 114);
+            this.txtLatimeCadru.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtLatimeCadru.Name = "txtLatimeCadru";
+            this.txtLatimeCadru.Size = new System.Drawing.Size(53, 34);
+            this.txtLatimeCadru.TabIndex = 26;
+            this.txtLatimeCadru.Text = "100";
+            this.txtLatimeCadru.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLatimeCadru_KeyDown);
+            this.txtLatimeCadru.Leave += new System.EventHandler(this.txtLatimeCadru_Leave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(198, 114);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(157, 29);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Latime cadru:";
+            // 
+            // txtLungimeCadru
+            // 
+            this.txtLungimeCadru.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLungimeCadru.Location = new System.Drawing.Point(382, 81);
+            this.txtLungimeCadru.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtLungimeCadru.Name = "txtLungimeCadru";
+            this.txtLungimeCadru.Size = new System.Drawing.Size(53, 34);
+            this.txtLungimeCadru.TabIndex = 24;
+            this.txtLungimeCadru.Text = "200";
+            this.txtLungimeCadru.Leave += new System.EventHandler(this.txtLungimeCadru_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(198, 81);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(178, 29);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Lungime cadru:";
+            // 
+            // textBoxMarime
+            // 
+            this.textBoxMarime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxMarime.Location = new System.Drawing.Point(243, 180);
+            this.textBoxMarime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxMarime.Name = "textBoxMarime";
+            this.textBoxMarime.Size = new System.Drawing.Size(53, 34);
+            this.textBoxMarime.TabIndex = 22;
+            this.textBoxMarime.Text = "48";
+            this.textBoxMarime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxMarime_KeyDown);
+            this.textBoxMarime.Leave += new System.EventHandler(this.textBoxMarime_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(59, 180);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 29);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Marime font:";
+            // 
             // checkBoxLive
             // 
             this.checkBoxLive.AutoSize = true;
@@ -527,8 +637,6 @@
             this.Controls.Add(this.btnCuloareFundal);
             this.Controls.Add(this.textBoxMarimeCantari);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxMarime);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBoxClock);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -551,6 +659,8 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPageCeas.ResumeLayout(false);
+            this.tabPageCeas.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -558,8 +668,6 @@
 
         #endregion
         private System.Windows.Forms.CheckBox checkBoxClock;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxMarime;
         private System.Windows.Forms.TextBox textBoxMarimeCantari;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColorDialog colorDialog1;
@@ -593,5 +701,15 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox textBoxCautare;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TabPage tabPageCeas;
+        private System.Windows.Forms.RadioButton radioButtonStangaCeas;
+        private System.Windows.Forms.RadioButton radioButtonDreaptaCeas;
+        private System.Windows.Forms.RadioButton radioButtonCentruCeas;
+        private System.Windows.Forms.TextBox txtLatimeCadru;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtLungimeCadru;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxMarime;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -23,6 +23,7 @@ namespace ProiectareCantari
         Ceas formCeas;
         Screen _screen;
         FrmBiblie _formBiblie;
+        Point aliniere;
 
         private string ConnectionString = "Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\db.db";
         private readonly List<Cantare> _listcantari = new List<Cantare>();
@@ -34,7 +35,9 @@ namespace ProiectareCantari
         public FrmPrincipal()
         {
             InitializeComponent();
-
+            txtLungimeCadru.Text = Properties.Settings.Default.LungimeCadruCeas.ToString();
+            txtLatimeCadru.Text = Properties.Settings.Default.LatimeCadruCeas.ToString();
+            textBoxMarime.Text = Properties.Settings.Default.MarimeCeas.ToString();
             try
             {
                 tabControl1.TabPages.Remove(tabPage3);
@@ -357,6 +360,8 @@ namespace ProiectareCantari
                     Properties.Settings.Default["MarimeCeas"] = Convert.ToInt32(textBoxMarime.Text);
                     Properties.Settings.Default.Save();
                     Properties.Settings.Default.Reload();
+                    if (formCeas != null)
+                        formCeas.ModificaFont();
                 }
                 catch
                 { };
@@ -625,12 +630,8 @@ namespace ProiectareCantari
                     {
                         formCeas = new Ceas();
                         formCeas.StartPosition = FormStartPosition.Manual;
-                        formCeas.Left = _screen.WorkingArea.Left + 10;
-                        formCeas.Top = _screen.WorkingArea.Top + 10;
-                        formCeas.Width = _screen.WorkingArea.Width + 10;
-                        formCeas.Height = _screen.WorkingArea.Height + 10;
-                        formCeas.WindowState = FormWindowState.Maximized;
-                        formCeas.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
+                        AliniazaCeas();
 
                         formCeas.Show();
                     }
@@ -1041,7 +1042,134 @@ namespace ProiectareCantari
 
             }
 
+        private void txtLungimeCadru_Leave(object sender, EventArgs e)
+        {
+            AliniazaCeas();
+        }
 
+        private void txtLatimeCadru_Leave(object sender, EventArgs e)
+        {
+            AliniazaCeas();
+
+        }
+
+        private void radioButtonCentruCeas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonCentruCeas.Checked == true)
+            { 
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width / 2 - Properties.Settings.Default.LungimeCadruCeas / 2, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                if (formCeas != null)
+                    formCeas.Location = aliniere;
+            }
+        }
+
+        private void radioButtonStangaCeas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonStangaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                if (formCeas != null)
+                formCeas.Location = aliniere;
+            }
+        }
+
+        private void radioButtonDreaptaCeas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDreaptaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width - Properties.Settings.Default.LungimeCadruCeas, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                if (formCeas != null)
+                    formCeas.Location = aliniere;
+            }
+
+        }
+
+        private void textBoxMarime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxMarime_Leave(object sender, EventArgs e)
+        {
+            Properties.Settings.Default["MarimeCeas"] = Convert.ToInt32(textBoxMarime.Text);
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+            if (formCeas != null)
+            formCeas.ModificaFont();
+        }
+
+        private void txtLungimeCadru_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    AliniazaCeas();
+                }
+                catch
+                { };
+            }
+        }
+        private void AliniazaCeas() {
+            Properties.Settings.Default["LatimeCadruCeas"] = Convert.ToInt32(txtLatimeCadru.Text);
+            Properties.Settings.Default["LungimeCadruCeas"] = Convert.ToInt32(txtLungimeCadru.Text);
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+            if (radioButtonCentruCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width / 2 - Properties.Settings.Default.LungimeCadruCeas / 2, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+            if (radioButtonStangaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+            if (radioButtonDreaptaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width - Properties.Settings.Default.LungimeCadruCeas, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+
+            formCeas.Width = Properties.Settings.Default.LungimeCadruCeas;
+            formCeas.Height = Properties.Settings.Default.LatimeCadruCeas;
+        }
+        private void AliniazaLungime() {
+            Properties.Settings.Default["LungimeCadruCeas"] = Convert.ToInt32(txtLungimeCadru.Text);
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+            if (radioButtonCentruCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width / 2 - Properties.Settings.Default.LungimeCadruCeas / 2, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+            if (radioButtonStangaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+            if (radioButtonDreaptaCeas.Checked == true)
+            {
+                aliniere = new Point(_screen.WorkingArea.Left + _screen.WorkingArea.Width - Properties.Settings.Default.LungimeCadruCeas, _screen.WorkingArea.Height - Properties.Settings.Default.LatimeCadruCeas);
+                formCeas.Location = aliniere;
+            }
+
+            formCeas.Width = Properties.Settings.Default.LungimeCadruCeas;
+            formCeas.Height = Properties.Settings.Default.LatimeCadruCeas;
+        }
+
+        private void txtLatimeCadru_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    AliniazaCeas();
+                }
+                catch
+                { };
+            }
+        }
     }
     public class MyButton : Button
     {

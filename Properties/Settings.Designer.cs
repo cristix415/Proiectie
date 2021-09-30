@@ -61,7 +61,7 @@ namespace ProiectareCantari.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int MarimeCeas {
             get {
                 return ((int)(this["MarimeCeas"]));
@@ -80,6 +80,42 @@ namespace ProiectareCantari.Properties {
             }
             set {
                 this["FlagCeas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int LungimeCadruCeas {
+            get {
+                return ((int)(this["LungimeCadruCeas"]));
+            }
+            set {
+                this["LungimeCadruCeas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int LatimeCadruCeas {
+            get {
+                return ((int)(this["LatimeCadruCeas"]));
+            }
+            set {
+                this["LatimeCadruCeas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int Aliniere {
+            get {
+                return ((int)(this["Aliniere"]));
+            }
+            set {
+                this["Aliniere"] = value;
             }
         }
     }

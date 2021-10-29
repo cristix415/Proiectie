@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +9,13 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Web;
 using System.Windows.Forms;
 
 namespace ProiectareCantari
@@ -62,7 +66,7 @@ namespace ProiectareCantari
                 LoadCantari();
 
                 // bind lista de cantari la controlul DrataGrivView
-                BindCantari();
+                BindCantari(_listcantari);
 
                 // incarcarea in menorie a cartilor din biblie
                 LoadCarti();
@@ -110,15 +114,15 @@ namespace ProiectareCantari
 
             }
         }
-        private void BindCantari()
+        private void BindCantari(IList<Cantare> listaCantari)
         {
 
             IList<CantareFormatata> listaCantariFormatate = new List<CantareFormatata>();
             IList<Cantare> listBIND;
             if (checkBoxBetel.Checked)
-                listBIND = _listcantari.Where(x => x.FlagBetel == 1).ToList();
+                listBIND = listaCantari.Where(x => x.FlagBetel == 1).ToList();
             else
-                listBIND = _listcantari;
+                listBIND = listaCantari;
 
             foreach (Cantare cantareDB in listBIND)
             {
@@ -127,7 +131,7 @@ namespace ProiectareCantari
                 cantare.listaCor = new List<string>();
                 cantare.Cantare = cantareDB;
                 String[] cantareNeta = cantareDB.Versuri.Split(new string[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.None);
-                cantare.Titlu = cantareNeta[0];
+                cantare.Titlu = cantareDB.Titlu;
                 cantare.TextulTOT = cantareDB.Versuri;
                 for (int i = 1; i < cantareNeta.Length - 1; i++)
                 {
@@ -224,8 +228,8 @@ namespace ProiectareCantari
         {
             DoubleClickButton lblStrofa = new DoubleClickButton();
             lblStrofa.DoubleClick += new EventHandler(FireDbClickClickEvent);
-            
-        //    DoubleClickButton lblStrofa = new Button();
+
+            //    DoubleClickButton lblStrofa = new Button();
             //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
             //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
             //   lblStrofa.Width = 520;
@@ -420,7 +424,7 @@ namespace ProiectareCantari
             try
             {
                 AddCantareDB(cantare);
-                BindCantari();
+                BindCantari(_listcantari);
             }
             catch (Exception ex)
             {
@@ -470,7 +474,7 @@ namespace ProiectareCantari
                 {
                     StergeCantare(cantare.Cantare);
                     LoadCantari();
-                    BindCantari();
+                    BindCantari(_listcantari);
                 }
                 catch (Exception ex)
                 {
@@ -483,20 +487,30 @@ namespace ProiectareCantari
         {
             try
             {
+                genericCantare genericCantare = new genericCantare();
                 CantareFormatata cantare = (dgwlista.SelectedRows[0].DataBoundItem as CantareFormatata);
-
+                if (String.IsNullOrEmpty(cantare.Cantare.Versuri))
+                {
+                    genericCantare = CallAPIid(cantare.Cantare.Id);
+                }
                 if (cantare == null)
                 {
                     MessageBox.Show("Alege o cantare");
                     return;
                 }
-
-                OpenCantare frmOpenCantare = new OpenCantare(cantare.Cantare);
+                string versuri="";
+                foreach (var str in genericCantare.cantec.continut)
+                    versuri = versuri + "\n\n" + str.text;
+                OpenCantare frmOpenCantare = new OpenCantare(new Cantare(genericCantare.cantec.titlu, versuri,0));
                 frmOpenCantare.ShowDialog();
 
                 if (frmOpenCantare.DialogResult == System.Windows.Forms.DialogResult.OK)
                 {
+                    if (genericCantare.cantec != null)
+                    AdaugaCantare(frmOpenCantare.Cantare);
+                    else
                     ModificaCantareDB(frmOpenCantare.Cantare);
+                    
                 }
             }
             catch
@@ -527,7 +541,7 @@ namespace ProiectareCantari
 
 
                 LoadCantari();
-                BindCantari();
+                BindCantari(_listcantari);
 
             }
         }
@@ -586,26 +600,26 @@ namespace ProiectareCantari
         private void FireDbClickClickEvent(object sender, EventArgs e)
         {
             checkBoxLive.Checked = true;
-                foreach (Control ctl in flowStrofe.Controls)
-                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
+            foreach (Control ctl in flowStrofe.Controls)
+                ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
-                Button btnStrofa = sender as Button;
-                btnStrofa.ForeColor = Color.Red;
-                //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
-                btnStrofa.Name = "focus";
+            Button btnStrofa = sender as Button;
+            btnStrofa.ForeColor = Color.Red;
+            //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
+            btnStrofa.Name = "focus";
 
-                if (_screen != null)
-                {
+            if (_screen != null)
+            {
 
-                    formSecondMonitor.BindStrofa(btnStrofa.Text);
-                    formSecondMonitor.BringToFront();
-                    // deschide formularul de cantare pe monitorul 2 fullscreen
-                    ProiecteazaCantare(_screen.WorkingArea);
+                formSecondMonitor.BindStrofa(btnStrofa.Text);
+                formSecondMonitor.BringToFront();
+                // deschide formularul de cantare pe monitorul 2 fullscreen
+                ProiecteazaCantare(_screen.WorkingArea);
 
-                }
-                else
-                    MessageBox.Show($"Monitor does not exists.");
-            
+            }
+            else
+                MessageBox.Show($"Monitor does not exists.");
+
 
         }
 
@@ -702,6 +716,17 @@ namespace ProiectareCantari
         private void dgwlista_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             CantareFormatata cantare = (dgwlista.SelectedRows[0].DataBoundItem) as CantareFormatata;
+            if (String.IsNullOrEmpty(cantare.Cantare.Versuri))
+            {
+               var cNet = CallAPIid(cantare.Cantare.Id);
+                string[] words = cNet.cantec.ordine.Split(' ');
+                foreach (var i in words)
+                {
+                    var str = cNet.cantec.continut.Where(x=>x.tip == i).SingleOrDefault().text;
+                    cantare.ListaStrofe.Add(str.Replace("<br>", "\n")); ;
+                }
+                
+            }
             CreazaSlide(cantare);
         }
 
@@ -712,7 +737,7 @@ namespace ProiectareCantari
 
         private void checkBoxBetel_CheckedChanged(object sender, EventArgs e)
         {
-            BindCantari();
+            BindCantari(_listcantari);
         }
 
 
@@ -1250,6 +1275,77 @@ namespace ProiectareCantari
             }
         }
         #endregion
+
+        private void buttonCautaNet_Click(object sender, EventArgs e)
+        {
+            CautaPeNet();
+        }
+        private void CautaPeNet()
+        {
+            string numeDeCautatPeNet = textBoxNet.Text;
+            CallAPINume();
+
+        }
+        public void CallAPINume()
+        {
+            WebClient _client = new WebClient();
+            _client.BaseAddress = "https://www.resursecrestine.ro/ajax/api/proiectie/cauta-cantec?q=" + textBoxNet.Text;
+            var response = _client.DownloadString("");
+            var message = JsonConvert.DeserializeObject<cantarile>(response);
+            List<Cantare> listcantari = new List<Cantare>();
+            foreach (var cant in message.cantari)
+            {
+                listcantari.Add(new Cantare(Convert.ToInt32(cant.id), StripHTML(cant.text), "", 0));
+            }
+
+            BindCantari(listcantari);
+
+            //List<CantareNet> listCantariNet = JsonConvert.DeserializeObject<List<CantareNet>>(response);
+            //foreach (var cantareNet in jsonCantariNet)
+            //{
+            //    Cantare cantare = new Cantare {
+            //        Id = cantareNet.Key.ToString(),
+            //        Versuri = cantareNet.Value.ToString();
+
+            //    }
+            //}
+
+        }
+        public genericCantare CallAPIid(int id)
+        {
+            WebClient _client = new WebClient();
+            _client.BaseAddress = "https://www.resursecrestine.ro/ajax/api/proiectie/cere-cantec-dupa-id?id=" + id + "&subtitrari=false";
+            var response = _client.DownloadString("");
+            var cantare = JsonConvert.DeserializeObject<genericCantare>(response);
+            return cantare;
+
+
+
+            //  BindCantari(listcantari);
+
+            //List<CantareNet> listCantariNet = JsonConvert.DeserializeObject<List<CantareNet>>(response);
+            //foreach (var cantareNet in jsonCantariNet)
+            //{
+            //    Cantare cantare = new Cantare {
+            //        Id = cantareNet.Key.ToString(),
+            //        Versuri = cantareNet.Value.ToString();
+
+            //    }
+            //}
+
+        }
+        public static string StripHTML(string input)
+        {
+            return Regex.Replace(input, "<.*?>", String.Empty);
+        }
+
+        private void textBoxNet_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CautaPeNet();
+            }
+        }
     }
     public class MyButton : Button
     {

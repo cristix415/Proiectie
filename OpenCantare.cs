@@ -22,7 +22,7 @@ namespace ProiectareCantari
         {
             InitializeComponent();            
             _cantare = cantare;
-            rtxtCantare.Text = cantare.Versuri;
+            rtxtCantare.Text = cantare.Versuri.Replace("<br>", "\n"); ;
             rtxtCantare.Tag = cantare;
         }
 

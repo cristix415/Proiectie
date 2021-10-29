@@ -52,6 +52,8 @@
             this.btnRef = new System.Windows.Forms.Button();
             this.dgvBiblia = new System.Windows.Forms.DataGridView();
             this.tabPageCANTARI = new System.Windows.Forms.TabPage();
+            this.buttonCautaNet = new System.Windows.Forms.Button();
+            this.textBoxNet = new System.Windows.Forms.TextBox();
             this.checkBoxBetel = new System.Windows.Forms.CheckBox();
             this.dgwlista = new System.Windows.Forms.DataGridView();
             this.labelTitlu = new System.Windows.Forms.Label();
@@ -326,6 +328,8 @@
             // 
             // tabPageCANTARI
             // 
+            this.tabPageCANTARI.Controls.Add(this.buttonCautaNet);
+            this.tabPageCANTARI.Controls.Add(this.textBoxNet);
             this.tabPageCANTARI.Controls.Add(this.checkBoxBetel);
             this.tabPageCANTARI.Controls.Add(this.dgwlista);
             this.tabPageCANTARI.Controls.Add(this.labelTitlu);
@@ -342,6 +346,24 @@
             this.tabPageCANTARI.TabIndex = 1;
             this.tabPageCANTARI.Text = "Lista Cantari";
             this.tabPageCANTARI.UseVisualStyleBackColor = true;
+            // 
+            // buttonCautaNet
+            // 
+            this.buttonCautaNet.Location = new System.Drawing.Point(348, 739);
+            this.buttonCautaNet.Name = "buttonCautaNet";
+            this.buttonCautaNet.Size = new System.Drawing.Size(121, 35);
+            this.buttonCautaNet.TabIndex = 10;
+            this.buttonCautaNet.Text = "Cauta Net";
+            this.buttonCautaNet.UseVisualStyleBackColor = true;
+            this.buttonCautaNet.Click += new System.EventHandler(this.buttonCautaNet_Click);
+            // 
+            // textBoxNet
+            // 
+            this.textBoxNet.Location = new System.Drawing.Point(26, 745);
+            this.textBoxNet.Name = "textBoxNet";
+            this.textBoxNet.Size = new System.Drawing.Size(293, 30);
+            this.textBoxNet.TabIndex = 9;
+            this.textBoxNet.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNet_KeyDown);
             // 
             // checkBoxBetel
             // 
@@ -743,5 +765,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCuloareTextCeas;
         private System.Windows.Forms.Button btnCuloareFundalCeas;
+        private System.Windows.Forms.Button buttonCautaNet;
+        private System.Windows.Forms.TextBox textBoxNet;
     }
 }

@@ -1293,10 +1293,13 @@ namespace ProiectareCantari
             var response = _client.DownloadString("");
             var message = JsonConvert.DeserializeObject<cantarile>(response);
             List<Cantare> listcantari = new List<Cantare>();
+            if (message.cantari != null)
             foreach (var cant in message.cantari)
             {
                 listcantari.Add(new Cantare(Convert.ToInt32(cant.id), StripHTML(cant.text), "", 0));
             }
+            else
+                listcantari.Add(new Cantare(Convert.ToInt32(1), "Nu s-a gasit", "", 0));
 
             BindCantari(listcantari);
 

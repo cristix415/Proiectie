@@ -79,6 +79,8 @@
             this.textBoxMarime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxLive = new System.Windows.Forms.CheckBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnImage = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageBiblia.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -678,11 +680,27 @@
             this.checkBoxLive.UseVisualStyleBackColor = true;
             this.checkBoxLive.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // btnImage
+            // 
+            this.btnImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImage.Location = new System.Drawing.Point(1344, 560);
+            this.btnImage.Name = "btnImage";
+            this.btnImage.Size = new System.Drawing.Size(283, 78);
+            this.btnImage.TabIndex = 13;
+            this.btnImage.Text = "Seteaza imagine de fundal";
+            this.btnImage.UseVisualStyleBackColor = true;
+            this.btnImage.Click += new System.EventHandler(this.btnImage_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1760, 849);
+            this.Controls.Add(this.btnImage);
             this.Controls.Add(this.checkBoxLive);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCuloareText);
@@ -767,5 +785,7 @@
         private System.Windows.Forms.Button btnCuloareFundalCeas;
         private System.Windows.Forms.Button buttonCautaNet;
         private System.Windows.Forms.TextBox textBoxNet;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnImage;
     }
 }

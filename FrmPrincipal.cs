@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -28,6 +29,7 @@ namespace ProiectareCantari
         Screen _screen;
         FrmBiblie _formBiblie;
         Point aliniere;
+        Control focusul;
 
         private string ConnectionString = "Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\db.db";
         private readonly List<Cantare> _listcantari = new List<Cantare>();
@@ -227,13 +229,8 @@ namespace ProiectareCantari
         private Button CreareLabel(string text)
         {
             DoubleClickButton lblStrofa = new DoubleClickButton();
-            lblStrofa.DoubleClick += new EventHandler(FireDbClickClickEvent);
+            lblStrofa.DoubleClick += (sender, e) => FireStrofaKEYEvent(lblStrofa, true);
 
-            //    DoubleClickButton lblStrofa = new Button();
-            //lblStrofa.TextChanged += new EventHandler(MeasureStringMin);
-            //  lblStrofa.Width = _screen.WorkingArea.Size.Width / 6;
-            //   lblStrofa.Width = 520;
-            //  lblStrofa.Height = _screen.WorkingArea.Size.Height / 6;
             int numLines = text.Split('\n').Length - 1;
             //  lblStrofa.Height = 35 * numLines;
             lblStrofa.Text = text;
@@ -245,14 +242,13 @@ namespace ProiectareCantari
             lblStrofa.BackColor = Properties.Settings.Default.CuloareFundal;
             lblStrofa.ForeColor = Properties.Settings.Default.CuloareText;
 
-            //lblStrofa.Font = new Font(FontFamily.GenericSansSerif, 15);
-            lblStrofa.Click += new EventHandler(FireClickEvent);
-            lblStrofa.KeyPress += new KeyPressEventHandler(FireStrofaKEYEvent);
-            //lblStrofa.DoubleClick += new EventHandler(FireDbClickClickEvent);
+               lblStrofa.Enter += (sender, e) => FireStrofaKEYEvent(lblStrofa, checkBoxLive.Checked); 
+          
 
 
             return lblStrofa;
         }
+
         private Label CreareNrButton(string text, int nrLines, bool cor)
         {
             Label lblStrofa = new Label();
@@ -546,44 +542,23 @@ namespace ProiectareCantari
             }
         }
         #endregion
-        private void FireClickEvent(object sender, EventArgs e)
+
+
+        private void FireStrofaKEYEvent(Control btn, Boolean? checkLive)
         {
+            if (checkLive == true)
+            checkBoxLive.Checked = true;
+            Control btnStrofa = btn;
             if (checkBoxLive.Checked)
             {
                 foreach (Control ctl in flowStrofe.Controls)
                     ctl.ForeColor = Properties.Settings.Default.CuloareText;
 
-                Button lblStrofa = sender as Button;
-                lblStrofa.ForeColor = Color.Red;
-                //lblStrofa.BorderStyle = BorderStyle.FixedSingle;
-                lblStrofa.Name = "focus";
-
-                if (_screen != null)
-                {
-
-                    formSecondMonitor.BindStrofa(lblStrofa.Text);
-                    formSecondMonitor.BringToFront();
-                    // deschide formularul de cantare pe monitorul 2 fullscreen
-                    ProiecteazaCantare(_screen.WorkingArea);
-
-                }
-                else
-                    MessageBox.Show($"Monitor does not exists.");
-                this.Focus();
-            }
-        }
-        private void FireStrofaKEYEvent(object sender, EventArgs e)
-        {
-            if (checkBoxLive.Checked)
-            {
-                foreach (Button ctl in flowStrofe.Controls)
-                    ctl.ForeColor = Properties.Settings.Default.CuloareText;
-
-                Button btnStrofa = sender as Button;
+         //       Button btnStrofa = sender as Button;
                 btnStrofa.ForeColor = Color.Red;
                 //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
                 btnStrofa.Name = "focus";
-
+                focusul = btnStrofa;
                 if (_screen != null)
                 {
 
@@ -596,31 +571,7 @@ namespace ProiectareCantari
                 else
                     MessageBox.Show($"Monitor does not exists.");
             }
-        }
-        private void FireDbClickClickEvent(object sender, EventArgs e)
-        {
-            checkBoxLive.Checked = true;
-            foreach (Control ctl in flowStrofe.Controls)
-                ctl.ForeColor = Properties.Settings.Default.CuloareText;
-
-            Button btnStrofa = sender as Button;
-            btnStrofa.ForeColor = Color.Red;
-            //   btnStrofa.BorderStyle = BorderStyle.FixedSingle;
-            btnStrofa.Name = "focus";
-
-            if (_screen != null)
-            {
-
-                formSecondMonitor.BindStrofa(btnStrofa.Text);
-                formSecondMonitor.BringToFront();
-                // deschide formularul de cantare pe monitorul 2 fullscreen
-                ProiecteazaCantare(_screen.WorkingArea);
-
-            }
-            else
-                MessageBox.Show($"Monitor does not exists.");
-
-
+            this.Focus();
         }
 
         private void rtxtCantare_KeyDown(object sender, KeyEventArgs e)
@@ -671,8 +622,8 @@ namespace ProiectareCantari
                 for (int i = 0; i < flowStrofe.Controls.Count; i++)
                     if (flowStrofe.Controls[i].Name == "focus")
                     {
-                        Label label = (Label)(flowStrofe.Controls[i + 1]);
-                        FireClickEvent(label, null);
+                        Control label = (Control)(flowStrofe.Controls[i + 1]);
+                        FireStrofaKEYEvent( label, checkBoxLive.Checked);
                     }
 
             }
@@ -967,7 +918,7 @@ namespace ProiectareCantari
                 if (_formBiblie != null)
                     _formBiblie.Hide();
 
-                foreach (Label ctl in flowStrofe.Controls)
+                foreach (Control ctl in flowStrofe.Controls)
                     ctl.ForeColor = Color.White;
                 checkBoxLive.Checked = false;
 
@@ -1341,12 +1292,47 @@ namespace ProiectareCantari
         {
             return Regex.Replace(input, "<.*?>", String.Empty);
         }
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SystemParametersInfo(uint uiAction, uint uiParam, String pvParam, uint fWinIni);
+
+        private const uint SPI_SETDESKWALLPAPER = 0x14;
+        private const uint SPIF_UPDATEINIFILE = 0x1;
+        private const uint SPIF_SENDWININICHANGE = 0x2;
+
+        private static void DisplayPicture(string file_name)
+        {
+            uint flags = 0;
+            if (!SystemParametersInfo(SPI_SETDESKWALLPAPER,
+                    0, file_name, flags))
+            {
+                Console.WriteLine("Error");
+            }
+        }
 
         private void textBoxNet_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 CautaPeNet();
+            }
+        }
+
+        private void btnImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string photo = openFileDialog1.FileName;
+                try
+                {
+                    DisplayPicture(photo);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("EROAREEEE");
+                }
             }
         }
     }

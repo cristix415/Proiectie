@@ -673,7 +673,7 @@ namespace ProiectareCantari
                 string[] words = cNet.cantec.ordine.Split(' ');
                 foreach (var i in words)
                 {
-                    var str = cNet.cantec.continut.Where(x=>x.tip == i).SingleOrDefault().text;
+                    var str = cNet.cantec.continut.Where(x=>x.tip == i).FirstOrDefault().text;
                     cantare.ListaStrofe.Add(str.Replace("<br>", "\n")); ;
                 }
                 

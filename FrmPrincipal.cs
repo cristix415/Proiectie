@@ -666,7 +666,9 @@ namespace ProiectareCantari
 
         private void dgwlista_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             CantareFormatata cantare = (dgwlista.SelectedRows[0].DataBoundItem) as CantareFormatata;
+            cantare.ListaStrofe.Clear();
             if (String.IsNullOrEmpty(cantare.Cantare.Versuri))
             {
                var cNet = CallAPIid(cantare.Cantare.Id);

@@ -1241,7 +1241,9 @@ namespace ProiectareCantari
         }
         public void CallAPINume()
         {
-            WebClient _client = new WebClient();
+            try
+            {
+                WebClient _client = new WebClient();
             _client.BaseAddress = "https://www.resursecrestine.ro/ajax/api/proiectie/cauta-cantec?q=" + textBoxNet.Text;
             var response = _client.DownloadString("");
             var message = JsonConvert.DeserializeObject<cantarile>(response);
@@ -1256,25 +1258,37 @@ namespace ProiectareCantari
 
             BindCantari(listcantari);
 
-            //List<CantareNet> listCantariNet = JsonConvert.DeserializeObject<List<CantareNet>>(response);
-            //foreach (var cantareNet in jsonCantariNet)
-            //{
-            //    Cantare cantare = new Cantare {
-            //        Id = cantareNet.Key.ToString(),
-            //        Versuri = cantareNet.Value.ToString();
+                //List<CantareNet> listCantariNet = JsonConvert.DeserializeObject<List<CantareNet>>(response);
+                //foreach (var cantareNet in jsonCantariNet)
+                //{
+                //    Cantare cantare = new Cantare {
+                //        Id = cantareNet.Key.ToString(),
+                //        Versuri = cantareNet.Value.ToString();
 
-            //    }
-            //}
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Asigura-te ca esti conctat la internet!");
+                
+            }
 
         }
         public genericCantare CallAPIid(int id)
         {
-            WebClient _client = new WebClient();
-            _client.BaseAddress = "https://www.resursecrestine.ro/ajax/api/proiectie/cere-cantec-dupa-id?id=" + id + "&subtitrari=false";
-            var response = _client.DownloadString("");
-            var cantare = JsonConvert.DeserializeObject<genericCantare>(response);
-            return cantare;
-
+            try
+            {
+                WebClient _client = new WebClient();
+                _client.BaseAddress = "https://www.resursecrestine.ro/ajax/api/proiectie/cere-cantec-dupa-id?id=" + id + "&subtitrari=false";
+                var response = _client.DownloadString("");
+                var cantare = JsonConvert.DeserializeObject<genericCantare>(response);
+                return cantare;
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Asigura-te ca esti conctat la internet!");
+                return null;
+            }
 
 
             //  BindCantari(listcantari);

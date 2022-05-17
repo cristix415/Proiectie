@@ -39,6 +39,17 @@
             this.btnCuloareText = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageCANTARI = new System.Windows.Forms.TabPage();
+            this.buttonCautaNet = new System.Windows.Forms.Button();
+            this.textBoxNet = new System.Windows.Forms.TextBox();
+            this.checkBoxBetel = new System.Windows.Forms.CheckBox();
+            this.dgwlista = new System.Windows.Forms.DataGridView();
+            this.labelTitlu = new System.Windows.Forms.Label();
+            this.btnAdaugaCantareNoua = new System.Windows.Forms.Button();
+            this.buttonModifica = new System.Windows.Forms.Button();
+            this.flowStrofe = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtCautare = new System.Windows.Forms.TextBox();
+            this.btnSterge = new System.Windows.Forms.Button();
             this.tabPageBiblia = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBoxCautare = new System.Windows.Forms.TextBox();
@@ -51,17 +62,6 @@
             this.txtCautareBiblia = new System.Windows.Forms.TextBox();
             this.btnRef = new System.Windows.Forms.Button();
             this.dgvBiblia = new System.Windows.Forms.DataGridView();
-            this.tabPageCANTARI = new System.Windows.Forms.TabPage();
-            this.buttonCautaNet = new System.Windows.Forms.Button();
-            this.textBoxNet = new System.Windows.Forms.TextBox();
-            this.checkBoxBetel = new System.Windows.Forms.CheckBox();
-            this.dgwlista = new System.Windows.Forms.DataGridView();
-            this.labelTitlu = new System.Windows.Forms.Label();
-            this.btnAdaugaCantareNoua = new System.Windows.Forms.Button();
-            this.buttonModifica = new System.Windows.Forms.Button();
-            this.flowStrofe = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtCautare = new System.Windows.Forms.TextBox();
-            this.btnSterge = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -82,14 +82,14 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnImage = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
+            this.tabPageCANTARI.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPageBiblia.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).BeginInit();
-            this.tabPageCANTARI.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPageCeas.SuspendLayout();
@@ -168,6 +168,144 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1297, 828);
             this.tabControl1.TabIndex = 11;
+            // 
+            // tabPageCANTARI
+            // 
+            this.tabPageCANTARI.Controls.Add(this.buttonCautaNet);
+            this.tabPageCANTARI.Controls.Add(this.textBoxNet);
+            this.tabPageCANTARI.Controls.Add(this.checkBoxBetel);
+            this.tabPageCANTARI.Controls.Add(this.dgwlista);
+            this.tabPageCANTARI.Controls.Add(this.labelTitlu);
+            this.tabPageCANTARI.Controls.Add(this.btnAdaugaCantareNoua);
+            this.tabPageCANTARI.Controls.Add(this.buttonModifica);
+            this.tabPageCANTARI.Controls.Add(this.flowStrofe);
+            this.tabPageCANTARI.Controls.Add(this.txtCautare);
+            this.tabPageCANTARI.Controls.Add(this.btnSterge);
+            this.tabPageCANTARI.Location = new System.Drawing.Point(4, 34);
+            this.tabPageCANTARI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageCANTARI.Name = "tabPageCANTARI";
+            this.tabPageCANTARI.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageCANTARI.Size = new System.Drawing.Size(1289, 790);
+            this.tabPageCANTARI.TabIndex = 1;
+            this.tabPageCANTARI.Text = "Lista Cantari";
+            this.tabPageCANTARI.UseVisualStyleBackColor = true;
+            // 
+            // buttonCautaNet
+            // 
+            this.buttonCautaNet.Location = new System.Drawing.Point(345, 740);
+            this.buttonCautaNet.Name = "buttonCautaNet";
+            this.buttonCautaNet.Size = new System.Drawing.Size(331, 35);
+            this.buttonCautaNet.TabIndex = 10;
+            this.buttonCautaNet.Text = "Cautare online dupa titlu si versuri";
+            this.buttonCautaNet.UseVisualStyleBackColor = true;
+            this.buttonCautaNet.Click += new System.EventHandler(this.buttonCautaNet_Click);
+            // 
+            // textBoxNet
+            // 
+            this.textBoxNet.Location = new System.Drawing.Point(26, 745);
+            this.textBoxNet.Name = "textBoxNet";
+            this.textBoxNet.Size = new System.Drawing.Size(293, 30);
+            this.textBoxNet.TabIndex = 9;
+            this.textBoxNet.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNet_KeyDown);
+            // 
+            // checkBoxBetel
+            // 
+            this.checkBoxBetel.AutoSize = true;
+            this.checkBoxBetel.Enabled = false;
+            this.checkBoxBetel.Location = new System.Drawing.Point(319, 18);
+            this.checkBoxBetel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxBetel.Name = "checkBoxBetel";
+            this.checkBoxBetel.Size = new System.Drawing.Size(97, 29);
+            this.checkBoxBetel.TabIndex = 8;
+            this.checkBoxBetel.Text = "BETEL";
+            this.checkBoxBetel.UseVisualStyleBackColor = true;
+            this.checkBoxBetel.CheckedChanged += new System.EventHandler(this.checkBoxBetel_CheckedChanged);
+            // 
+            // dgwlista
+            // 
+            this.dgwlista.AllowUserToAddRows = false;
+            this.dgwlista.AllowUserToDeleteRows = false;
+            this.dgwlista.AllowUserToResizeColumns = false;
+            this.dgwlista.AllowUserToResizeRows = false;
+            this.dgwlista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgwlista.ColumnHeadersHeight = 29;
+            this.dgwlista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgwlista.ColumnHeadersVisible = false;
+            this.dgwlista.EnableHeadersVisualStyles = false;
+            this.dgwlista.Location = new System.Drawing.Point(20, 66);
+            this.dgwlista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgwlista.MultiSelect = false;
+            this.dgwlista.Name = "dgwlista";
+            this.dgwlista.ReadOnly = true;
+            this.dgwlista.RowHeadersVisible = false;
+            this.dgwlista.RowHeadersWidth = 51;
+            this.dgwlista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgwlista.RowTemplate.Height = 24;
+            this.dgwlista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgwlista.Size = new System.Drawing.Size(400, 526);
+            this.dgwlista.TabIndex = 7;
+            this.dgwlista.VirtualMode = true;
+            this.dgwlista.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwlista_CellDoubleClick);
+            // 
+            // labelTitlu
+            // 
+            this.labelTitlu.Location = new System.Drawing.Point(465, 16);
+            this.labelTitlu.Name = "labelTitlu";
+            this.labelTitlu.Size = new System.Drawing.Size(200, 30);
+            this.labelTitlu.TabIndex = 6;
+            this.labelTitlu.Text = "TITLU CANTARII";
+            this.labelTitlu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnAdaugaCantareNoua
+            // 
+            this.btnAdaugaCantareNoua.Location = new System.Drawing.Point(36, 654);
+            this.btnAdaugaCantareNoua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdaugaCantareNoua.Name = "btnAdaugaCantareNoua";
+            this.btnAdaugaCantareNoua.Size = new System.Drawing.Size(375, 46);
+            this.btnAdaugaCantareNoua.TabIndex = 5;
+            this.btnAdaugaCantareNoua.Text = "Adauga Cantare noua";
+            this.btnAdaugaCantareNoua.UseVisualStyleBackColor = true;
+            this.btnAdaugaCantareNoua.Click += new System.EventHandler(this.AdaugaCantareNoua_Click);
+            // 
+            // buttonModifica
+            // 
+            this.buttonModifica.Location = new System.Drawing.Point(36, 613);
+            this.buttonModifica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonModifica.Name = "buttonModifica";
+            this.buttonModifica.Size = new System.Drawing.Size(117, 34);
+            this.buttonModifica.TabIndex = 4;
+            this.buttonModifica.Text = "Modifica";
+            this.buttonModifica.UseVisualStyleBackColor = true;
+            this.buttonModifica.Click += new System.EventHandler(this.buttonModifica_Click);
+            // 
+            // flowStrofe
+            // 
+            this.flowStrofe.AutoScroll = true;
+            this.flowStrofe.Location = new System.Drawing.Point(449, 64);
+            this.flowStrofe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flowStrofe.Name = "flowStrofe";
+            this.flowStrofe.Size = new System.Drawing.Size(786, 635);
+            this.flowStrofe.TabIndex = 3;
+            // 
+            // txtCautare
+            // 
+            this.txtCautare.Location = new System.Drawing.Point(13, 17);
+            this.txtCautare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCautare.Name = "txtCautare";
+            this.txtCautare.Size = new System.Drawing.Size(289, 30);
+            this.txtCautare.TabIndex = 2;
+            this.txtCautare.TextChanged += new System.EventHandler(this.txtCautare_TextChanged);
+            // 
+            // btnSterge
+            // 
+            this.btnSterge.Location = new System.Drawing.Point(269, 613);
+            this.btnSterge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSterge.Name = "btnSterge";
+            this.btnSterge.Size = new System.Drawing.Size(141, 34);
+            this.btnSterge.TabIndex = 1;
+            this.btnSterge.Text = "STERGE";
+            this.btnSterge.UseVisualStyleBackColor = true;
+            this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
             // 
             // tabPageBiblia
             // 
@@ -327,143 +465,6 @@
             this.dgvBiblia.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_CellDoubleClick);
             this.dgvBiblia.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBiblia_RowEnter);
             this.dgvBiblia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvBiblia_KeyDown);
-            // 
-            // tabPageCANTARI
-            // 
-            this.tabPageCANTARI.Controls.Add(this.buttonCautaNet);
-            this.tabPageCANTARI.Controls.Add(this.textBoxNet);
-            this.tabPageCANTARI.Controls.Add(this.checkBoxBetel);
-            this.tabPageCANTARI.Controls.Add(this.dgwlista);
-            this.tabPageCANTARI.Controls.Add(this.labelTitlu);
-            this.tabPageCANTARI.Controls.Add(this.btnAdaugaCantareNoua);
-            this.tabPageCANTARI.Controls.Add(this.buttonModifica);
-            this.tabPageCANTARI.Controls.Add(this.flowStrofe);
-            this.tabPageCANTARI.Controls.Add(this.txtCautare);
-            this.tabPageCANTARI.Controls.Add(this.btnSterge);
-            this.tabPageCANTARI.Location = new System.Drawing.Point(4, 34);
-            this.tabPageCANTARI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageCANTARI.Name = "tabPageCANTARI";
-            this.tabPageCANTARI.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageCANTARI.Size = new System.Drawing.Size(1289, 790);
-            this.tabPageCANTARI.TabIndex = 1;
-            this.tabPageCANTARI.Text = "Lista Cantari";
-            this.tabPageCANTARI.UseVisualStyleBackColor = true;
-            // 
-            // buttonCautaNet
-            // 
-            this.buttonCautaNet.Location = new System.Drawing.Point(348, 739);
-            this.buttonCautaNet.Name = "buttonCautaNet";
-            this.buttonCautaNet.Size = new System.Drawing.Size(121, 35);
-            this.buttonCautaNet.TabIndex = 10;
-            this.buttonCautaNet.Text = "Cauta Net";
-            this.buttonCautaNet.UseVisualStyleBackColor = true;
-            this.buttonCautaNet.Click += new System.EventHandler(this.buttonCautaNet_Click);
-            // 
-            // textBoxNet
-            // 
-            this.textBoxNet.Location = new System.Drawing.Point(26, 745);
-            this.textBoxNet.Name = "textBoxNet";
-            this.textBoxNet.Size = new System.Drawing.Size(293, 30);
-            this.textBoxNet.TabIndex = 9;
-            this.textBoxNet.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNet_KeyDown);
-            // 
-            // checkBoxBetel
-            // 
-            this.checkBoxBetel.AutoSize = true;
-            this.checkBoxBetel.Location = new System.Drawing.Point(319, 18);
-            this.checkBoxBetel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxBetel.Name = "checkBoxBetel";
-            this.checkBoxBetel.Size = new System.Drawing.Size(97, 29);
-            this.checkBoxBetel.TabIndex = 8;
-            this.checkBoxBetel.Text = "BETEL";
-            this.checkBoxBetel.UseVisualStyleBackColor = true;
-            this.checkBoxBetel.CheckedChanged += new System.EventHandler(this.checkBoxBetel_CheckedChanged);
-            // 
-            // dgwlista
-            // 
-            this.dgwlista.AllowUserToAddRows = false;
-            this.dgwlista.AllowUserToDeleteRows = false;
-            this.dgwlista.AllowUserToResizeColumns = false;
-            this.dgwlista.AllowUserToResizeRows = false;
-            this.dgwlista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwlista.ColumnHeadersHeight = 29;
-            this.dgwlista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgwlista.ColumnHeadersVisible = false;
-            this.dgwlista.EnableHeadersVisualStyles = false;
-            this.dgwlista.Location = new System.Drawing.Point(20, 66);
-            this.dgwlista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgwlista.MultiSelect = false;
-            this.dgwlista.Name = "dgwlista";
-            this.dgwlista.ReadOnly = true;
-            this.dgwlista.RowHeadersVisible = false;
-            this.dgwlista.RowHeadersWidth = 51;
-            this.dgwlista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgwlista.RowTemplate.Height = 24;
-            this.dgwlista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwlista.Size = new System.Drawing.Size(400, 526);
-            this.dgwlista.TabIndex = 7;
-            this.dgwlista.VirtualMode = true;
-            this.dgwlista.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwlista_CellDoubleClick);
-            // 
-            // labelTitlu
-            // 
-            this.labelTitlu.Location = new System.Drawing.Point(465, 16);
-            this.labelTitlu.Name = "labelTitlu";
-            this.labelTitlu.Size = new System.Drawing.Size(200, 30);
-            this.labelTitlu.TabIndex = 6;
-            this.labelTitlu.Text = "TITLU CANTARII";
-            this.labelTitlu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnAdaugaCantareNoua
-            // 
-            this.btnAdaugaCantareNoua.Location = new System.Drawing.Point(36, 654);
-            this.btnAdaugaCantareNoua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAdaugaCantareNoua.Name = "btnAdaugaCantareNoua";
-            this.btnAdaugaCantareNoua.Size = new System.Drawing.Size(375, 46);
-            this.btnAdaugaCantareNoua.TabIndex = 5;
-            this.btnAdaugaCantareNoua.Text = "Adauga Cantare noua";
-            this.btnAdaugaCantareNoua.UseVisualStyleBackColor = true;
-            this.btnAdaugaCantareNoua.Click += new System.EventHandler(this.AdaugaCantareNoua_Click);
-            // 
-            // buttonModifica
-            // 
-            this.buttonModifica.Location = new System.Drawing.Point(36, 613);
-            this.buttonModifica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonModifica.Name = "buttonModifica";
-            this.buttonModifica.Size = new System.Drawing.Size(117, 34);
-            this.buttonModifica.TabIndex = 4;
-            this.buttonModifica.Text = "Modifica";
-            this.buttonModifica.UseVisualStyleBackColor = true;
-            this.buttonModifica.Click += new System.EventHandler(this.buttonModifica_Click);
-            // 
-            // flowStrofe
-            // 
-            this.flowStrofe.AutoScroll = true;
-            this.flowStrofe.Location = new System.Drawing.Point(449, 64);
-            this.flowStrofe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowStrofe.Name = "flowStrofe";
-            this.flowStrofe.Size = new System.Drawing.Size(786, 635);
-            this.flowStrofe.TabIndex = 3;
-            // 
-            // txtCautare
-            // 
-            this.txtCautare.Location = new System.Drawing.Point(13, 17);
-            this.txtCautare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCautare.Name = "txtCautare";
-            this.txtCautare.Size = new System.Drawing.Size(289, 30);
-            this.txtCautare.TabIndex = 2;
-            this.txtCautare.TextChanged += new System.EventHandler(this.txtCautare_TextChanged);
-            // 
-            // btnSterge
-            // 
-            this.btnSterge.Location = new System.Drawing.Point(269, 613);
-            this.btnSterge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSterge.Name = "btnSterge";
-            this.btnSterge.Size = new System.Drawing.Size(141, 34);
-            this.btnSterge.TabIndex = 1;
-            this.btnSterge.Text = "STERGE";
-            this.btnSterge.UseVisualStyleBackColor = true;
-            this.btnSterge.Click += new System.EventHandler(this.btnSterge_Click);
             // 
             // tabPage3
             // 
@@ -715,6 +716,9 @@
             this.Text = "Afisare Cantari   - by Cristty";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPrincipal_KeyDown);
             this.tabControl1.ResumeLayout(false);
+            this.tabPageCANTARI.ResumeLayout(false);
+            this.tabPageCANTARI.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).EndInit();
             this.tabPageBiblia.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -723,9 +727,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiblia)).EndInit();
-            this.tabPageCANTARI.ResumeLayout(false);
-            this.tabPageCANTARI.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

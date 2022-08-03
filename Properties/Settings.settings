@@ -12,13 +12,13 @@
       <Value Profile="(Default)">70</Value>
     </Setting>
     <Setting Name="MarimeCeas" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">40</Value>
+      <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="FlagCeas" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LungimeCadruCeas" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">200</Value>
+      <Value Profile="(Default)">220</Value>
     </Setting>
     <Setting Name="LatimeCadruCeas" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
@@ -27,7 +27,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="CuloareFundalCeas" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">64, 0, 64</Value>
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="CuloareTextCeas" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)" />

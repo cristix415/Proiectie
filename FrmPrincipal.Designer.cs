@@ -40,6 +40,7 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageCANTARI = new System.Windows.Forms.TabPage();
+            this.dgvOffline = new System.Windows.Forms.DataGridView();
             this.buttonCautaNet = new System.Windows.Forms.Button();
             this.textBoxNet = new System.Windows.Forms.TextBox();
             this.checkBoxBetel = new System.Windows.Forms.CheckBox();
@@ -83,6 +84,7 @@
             this.btnImage = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageCANTARI.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).BeginInit();
             this.tabPageBiblia.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -171,6 +173,7 @@
             // 
             // tabPageCANTARI
             // 
+            this.tabPageCANTARI.Controls.Add(this.dgvOffline);
             this.tabPageCANTARI.Controls.Add(this.buttonCautaNet);
             this.tabPageCANTARI.Controls.Add(this.textBoxNet);
             this.tabPageCANTARI.Controls.Add(this.checkBoxBetel);
@@ -189,6 +192,32 @@
             this.tabPageCANTARI.TabIndex = 1;
             this.tabPageCANTARI.Text = "Lista Cantari";
             this.tabPageCANTARI.UseVisualStyleBackColor = true;
+            // 
+            // dgvOffline
+            // 
+            this.dgvOffline.AllowUserToAddRows = false;
+            this.dgvOffline.AllowUserToDeleteRows = false;
+            this.dgvOffline.AllowUserToResizeColumns = false;
+            this.dgvOffline.AllowUserToResizeRows = false;
+            this.dgvOffline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOffline.ColumnHeadersHeight = 29;
+            this.dgvOffline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvOffline.ColumnHeadersVisible = false;
+            this.dgvOffline.EnableHeadersVisualStyles = false;
+            this.dgvOffline.Location = new System.Drawing.Point(20, 66);
+            this.dgvOffline.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvOffline.MultiSelect = false;
+            this.dgvOffline.Name = "dgvOffline";
+            this.dgvOffline.ReadOnly = true;
+            this.dgvOffline.RowHeadersVisible = false;
+            this.dgvOffline.RowHeadersWidth = 51;
+            this.dgvOffline.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvOffline.RowTemplate.Height = 24;
+            this.dgvOffline.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOffline.Size = new System.Drawing.Size(400, 526);
+            this.dgvOffline.TabIndex = 11;
+            this.dgvOffline.VirtualMode = true;
+            this.dgvOffline.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOffline_CellDoubleClick);
             // 
             // buttonCautaNet
             // 
@@ -718,6 +747,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageCANTARI.ResumeLayout(false);
             this.tabPageCANTARI.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwlista)).EndInit();
             this.tabPageBiblia.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -788,5 +818,6 @@
         private System.Windows.Forms.TextBox textBoxNet;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnImage;
+        private System.Windows.Forms.DataGridView dgvOffline;
     }
 }

@@ -68,7 +68,7 @@ namespace ProiectareCantari
                 LoadCantari();
 
                 // bind lista de cantari la controlul DrataGrivView
-                BindCantari(_listcantari);
+                BindCantari(_listcantari, false);
 
                 // incarcarea in menorie a cartilor din biblie
                 LoadCarti();
@@ -116,7 +116,7 @@ namespace ProiectareCantari
 
             }
         }
-        private void BindCantari(IList<Cantare> listaCantari)
+        private void BindCantari(IList<Cantare> listaCantari, bool net)
         {
 
             IList<CantareFormatata> listaCantariFormatate = new List<CantareFormatata>();
@@ -167,11 +167,15 @@ namespace ProiectareCantari
 
             }
 
-            _listaCantariFormatate = listaCantariFormatate;
-
             var binding = new BindingSource();
-            binding.DataSource = _listaCantariFormatate;
-            dgwlista.DataSource = binding;
+            binding.DataSource = listaCantariFormatate;
+            if (net == false) {
+                _listaCantariFormatate = listaCantariFormatate;
+                dgvOffline.DataSource = binding;
+            }
+            else {
+                dgwlista.DataSource = binding;
+            }            
 
         }
         private void ProiecteazaCantare(Rectangle workingArea)
@@ -205,12 +209,23 @@ namespace ProiectareCantari
 
 
 
-                if (cantare.listaCor.Count > 0)
+                if (cantare.listaCor.Count == 1)
                 {
                     int numLinesCor = cantare.listaCor[0].Split('\n').Length - 1;
                     Label btnNrcor = CreareNrButton("", numLinesCor, true);
                     flowStrofe.Controls.Add(btnNrcor);
                     Button btnCor = CreareLabel(cantare.listaCor[0]);
+
+                    flowStrofe.Controls.Add(btnCor);
+                    btnNrcor.Height = btnCor.Height;
+
+                }
+                if (cantare.listaCor.Count > 1)
+                {
+                    int numLinesCor = cantare.listaCor[i].Split('\n').Length - 1;
+                    Label btnNrcor = CreareNrButton("", numLinesCor, true);
+                    flowStrofe.Controls.Add(btnNrcor);
+                    Button btnCor = CreareLabel(cantare.listaCor[i]);
 
                     flowStrofe.Controls.Add(btnCor);
                     btnNrcor.Height = btnCor.Height;
@@ -286,7 +301,8 @@ namespace ProiectareCantari
 
         private void CautaDupaTitlu()
         {
-            BindingSource lista = dgwlista.DataSource as BindingSource;
+            dgvOffline.Visible = true;
+            BindingSource lista = dgvOffline.DataSource as BindingSource;
             var lis = lista.DataSource as List<CantareFormatata>;
             lis = _listaCantariFormatate.ToList();
             string cuvant = txtCautare.Text.ToLower();
@@ -296,7 +312,7 @@ namespace ProiectareCantari
 
             binding.DataSource = listtt;
 
-            dgwlista.DataSource = binding;
+            dgvOffline.DataSource = binding;
 
         }
 
@@ -420,7 +436,7 @@ namespace ProiectareCantari
             try
             {
                 AddCantareDB(cantare);
-                BindCantari(_listcantari);
+                BindCantari(_listcantari, false);
             }
             catch (Exception ex)
             {
@@ -470,7 +486,7 @@ namespace ProiectareCantari
                 {
                     StergeCantare(cantare.Cantare);
                     LoadCantari();
-                    BindCantari(_listcantari);
+                    BindCantari(_listcantari, false);
                 }
                 catch (Exception ex)
                 {
@@ -537,7 +553,7 @@ namespace ProiectareCantari
 
 
                 LoadCantari();
-                BindCantari(_listcantari);
+                BindCantari(_listcantari, false);
 
             }
         }
@@ -690,7 +706,7 @@ namespace ProiectareCantari
 
         private void checkBoxBetel_CheckedChanged(object sender, EventArgs e)
         {
-            BindCantari(_listcantari);
+            BindCantari(_listcantari, false);
         }
 
 
@@ -1235,6 +1251,8 @@ namespace ProiectareCantari
         }
         private void CautaPeNet()
         {
+            dgvOffline.Visible = false;
+            dgwlista.Visible = true;
             string numeDeCautatPeNet = textBoxNet.Text;
             CallAPINume();
 
@@ -1256,7 +1274,7 @@ namespace ProiectareCantari
             else
                 listcantari.Add(new Cantare(Convert.ToInt32(1), "Nu s-a gasit", "", 0));
 
-            BindCantari(listcantari);
+            BindCantari(listcantari, true);
 
                 //List<CantareNet> listCantariNet = JsonConvert.DeserializeObject<List<CantareNet>>(response);
                 //foreach (var cantareNet in jsonCantariNet)
@@ -1350,6 +1368,25 @@ namespace ProiectareCantari
                     MessageBox.Show("EROAREEEE");
                 }
             }
+        }
+
+        private void dgvOffline_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CantareFormatata cantare = (dgvOffline.SelectedRows[0].DataBoundItem) as CantareFormatata;
+            
+            if (String.IsNullOrEmpty(cantare.Cantare.Versuri))
+            {
+                var cNet = CallAPIid(cantare.Cantare.Id);
+                string[] words = cNet.cantec.ordine.Split(' ');
+                foreach (var i in words)
+                {
+                    var str = cNet.cantec.continut.Where(x => x.tip == i).FirstOrDefault().text;
+                    cantare.ListaStrofe.Add(str.Replace("<br>", "\n")); ;
+                }
+
+            }
+            CreazaSlide(cantare);
+
         }
     }
     public class MyButton : Button

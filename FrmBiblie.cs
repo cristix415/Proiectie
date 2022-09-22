@@ -15,12 +15,13 @@ namespace ProiectareCantari
         {
             InitializeComponent();
 
+
             //initializare setari la fiecare deschidere a formularului
-            lblReferinta.Font = new Font("Arial" ,90);
+            lblReferinta.Font = new Font("Arial", 90);
             lblVerset.Font = new Font("Arial", 80);
             lblReferinta.Width = _screen.WorkingArea.Width;
             lblVerset.Width = _screen.WorkingArea.Width;
-            lblReferinta.Height = _screen.WorkingArea.Height /10;
+            lblReferinta.Height = _screen.WorkingArea.Height / 10;
             lblVerset.Height = _screen.WorkingArea.Height - lblReferinta.Height;
             lblReferinta.TextAlign = ContentAlignment.MiddleCenter;
             lblVerset.TextAlign = ContentAlignment.MiddleCenter;
@@ -34,10 +35,10 @@ namespace ProiectareCantari
             lblVerset.BackColor = Properties.Settings.Default.CuloareFundal;
             lblVerset.ForeColor = Properties.Settings.Default.CuloareText;
             lblVerset.Text = verset.text;
-            lblReferinta.Text = carte.long_name + " "+  verset.chapter + " : " + verset.verse;
+            lblReferinta.Text = carte.long_name + " " + verset.chapter + " : " + verset.verse;
             Helper.MeasureStringMin(lblReferinta, 75);
             Helper.MeasureStringMin(lblVerset, 75);
         }
-      
+
     }
 }
